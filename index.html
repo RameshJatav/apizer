@@ -4,8 +4,10 @@
 <head>
   <meta charset="UTF-8" />
   <title>REST API Tester</title>
-  <meta name="description" content="Apizer is a modern, fast and powerful REST API testing tool with history tracking, token auth, file upload and more.">
-  <meta name="keywords" content="Apizer, API Tester, REST API Tool, API Client, Postman Alternative, API Analyzer, API Debugger">
+  <meta name="description"
+    content="Apizer is a modern, fast and powerful REST API testing tool with history tracking, token auth, file upload and more.">
+  <meta name="keywords"
+    content="Apizer, API Tester, REST API Tool, API Client, Postman Alternative, API Analyzer, API Debugger">
   <meta name="author" content="Apizer Dev Team">
 
   <!-- Social Sharing (Open Graph + Twitter) -->
@@ -245,6 +247,13 @@
 
       const method = document.getElementById('method').value;
       const url = document.getElementById('url').value;
+      
+      if (!url || !/^https?:\/\/.+/.test(url)) {
+        alert("Please enter a valid URL starting with http:// or https://");
+        spinner.classList.add('hidden');
+        sendBtn.disabled = false;
+        return;
+      }
       const headersText = document.getElementById('headers').value;
       const authType = document.getElementById('auth-type').value;
       const token = document.getElementById('auth-token').value.trim();
