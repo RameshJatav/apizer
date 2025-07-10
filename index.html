@@ -12,8 +12,7 @@
 
   <!-- Social Sharing (Open Graph + Twitter) -->
   <meta property="og:title" content="Apizer – Smart REST API Testing Tool" />
-  <meta property="og:description"
-    content="Test your APIs smarter and faster with Apizer. Free, fast and intuitive API request tool." />
+  <meta property="og:description" content="Test your APIs smarter and faster with Apizer. Free, fast and intuitive API request tool." />
   <meta property="og:image" content="https://your-image-link.com/apizer-preview.png" />
   <meta property="og:url" content="https://your-username.github.io/apizer" />
   <meta name="twitter:card" content="summary_large_image">
@@ -29,6 +28,22 @@
     #response-body::-webkit-scrollbar-thumb {
       background: #4fd1c5;
       border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2dd4bf;
+      /* teal color */
+      border-radius: 10px;
+      border: 2px solid transparent;
+      background-clip: content-box;
     }
 
     .spinner {
@@ -75,12 +90,13 @@
 <body class="bg-black min-h-screen text-white">
 
   <!-- Navbar -->
-  <nav class="bg-gray-900 p-4 shadow-md flex justify-between items-center">
-    <h1 class="text-xl font-bold text-teal-500"> REST API Tool</h1>
-    <ul class="flex gap-6">
-      <li><a href="#" class="hover:text-teal-400">API Testing</a></li>
-      <li><a href="#" class="hover:text-teal-400">About Us</a></li>
-      <li><button onclick="showHistory()" class="hover:text-teal-400">History</button></li>
+  <nav
+    class="fixed  top-0 left-0 w-full z-50 bg-gray-900/50 backdrop-blur-md backdrop-saturate-150 p-6 shadow-md flex justify-between items-center rounded-b-lg ">
+    <h1 class="text-xl font-bold text-teal-500">REST API Tool</h1>
+    <ul class="flex gap-6 text-white">
+      <li><a href="#" class="hover:text-teal-400 transition">API Testing</a></li>
+      <li><a href="#" class="hover:text-teal-400 transition">About Us</a></li>
+      <li><button onclick="showHistory()" class="hover:text-teal-400 transition">History</button></li>
     </ul>
   </nav>
 
@@ -96,9 +112,9 @@
   </div>
 
   <!-- Main Content -->
-  <div class="p-6 flex flex-wrap md:flex-nowrap gap-6">
+  <div class="p-6 flex flex-wrap md:flex-nowrap gap-6 pt-20">
     <!-- Left Panel -->
-    <div class="w-full md:w-1/2 bg-gray-950 p-6 rounded shadow border border-gray-800">
+    <div class="w-full md:w-1/2 order-1 md:order-1 bg-gray-950 p-6 rounded shadow border border-gray-800">
       <h2 class="text-2xl font-bold mb-4">REST API Testing Tool</h2>
 
       <div class="mb-4">
@@ -156,7 +172,7 @@
     </div>
 
     <!-- Right Panel -->
-    <div class="w-full md:w-1/2 bg-gray-900 p-6 rounded shadow border border-gray-700">
+    <div class="w-full md:w-1/2 order-2 md:order-2 bg-gray-900 p-6 rounded shadow border border-gray-700">
       <h2 class="text-xl font-semibold">Response</h2>
       <div id="response-status" class="mt-2 font-mono text-sm text-gray-300"></div>
       <div id="time-display" class="text-xs text-gray-400 mb-2"></div>
@@ -247,13 +263,6 @@
 
       const method = document.getElementById('method').value;
       const url = document.getElementById('url').value;
-      
-      if (!url || !/^https?:\/\/.+/.test(url)) {
-        alert("Please enter a valid URL starting with http:// or https://");
-        spinner.classList.add('hidden');
-        sendBtn.disabled = false;
-        return;
-      }
       const headersText = document.getElementById('headers').value;
       const authType = document.getElementById('auth-type').value;
       const token = document.getElementById('auth-token').value.trim();
