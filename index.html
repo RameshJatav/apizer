@@ -2,439 +2,398 @@
 <html lang="en">
 
 <head>
-      <meta charset="UTF-8" />
-      <title>REST API Tester</title>
-      <meta name="description"
-            content="Apizer is a modern, fast and powerful REST API testing tool with history tracking, token auth, file upload and more.">
-      <meta name="keywords"
-            content="Apizer, API Tester, REST API Tool, API Client, Postman Alternative, API Analyzer, API Debugger">
-      <meta name="author" content="Apizer Dev Team">
+  <meta charset="UTF-8" />
+  <title>REST API Tester</title>
+  <meta name="description"
+    content="Apizer is a modern, fast and powerful REST API testing tool with history tracking, token auth, file upload and more.">
+  <meta name="keywords"
+    content="Apizer, API Tester, REST API Tool, API Client, Postman Alternative, API Analyzer, API Debugger">
+  <meta name="author" content="Apizer Dev Team">
 
-      <!-- Social Sharing (Open Graph + Twitter) -->
-      <meta property="og:title" content="Apizer – Smart REST API Testing Tool" />
-      <meta property="og:description"
-            content="Test your APIs smarter and faster with Apizer. Free, fast and intuitive API request tool." />
-      <meta property="og:image" content="https://your-image-link.com/apizer-preview.png" />
-      <meta property="og:url" content="https://your-username.github.io/apizer" />
-      <meta name="twitter:card" content="summary_large_image">
+  <!-- Social Sharing (Open Graph + Twitter) -->
+  <meta property="og:title" content="Apizer – Smart REST API Testing Tool" />
+  <meta property="og:description" content="Test your APIs smarter and faster with Apizer. Free, fast and intuitive API request tool." />
+  <meta property="og:image" content="https://your-image-link.com/apizer-preview.png" />
+  <meta property="og:url" content="https://your-username.github.io/apizer" />
+  <meta name="twitter:card" content="summary_large_image">
 
-      <link rel="icon" href="./logo_myportfolio.png" />
-      <script src="https://cdn.tailwindcss.com"></script>
-      <style>
-            #response-body::-webkit-scrollbar {
-                  width: 8px;
-            }
+  <link rel="icon"
+    href="./logo_myportfolio.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    #response-body::-webkit-scrollbar {
+      width: 8px;
+    }
 
-            #response-body::-webkit-scrollbar-thumb {
-                  background: #4fd1c5;
-                  border-radius: 10px;
-            }
+    #response-body::-webkit-scrollbar-thumb {
+      background: #4fd1c5;
+      border-radius: 10px;
+    }
 
-            ::-webkit-scrollbar {
-                  width: 6px;
-            }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
 
-            ::-webkit-scrollbar-track {
-                  background: transparent;
-            }
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
 
-            ::-webkit-scrollbar-thumb {
-                  background: #2dd4bf;
-                  /* teal color */
-                  border-radius: 10px;
-                  border: 2px solid transparent;
-                  background-clip: content-box;
-            }
+    ::-webkit-scrollbar-thumb {
+      background: #2dd4bf;
+      /* teal color */
+      border-radius: 10px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
 
-            .spinner {
-                  border: 3px solid transparent;
-                  border-top-color: #4fd1c5;
-                  border-radius: 50%;
-                  width: 20px;
-                  height: 20px;
-                  animation: spin 1s linear infinite;
-            }
+    .spinner {
+      border: 3px solid transparent;
+      border-top-color: #4fd1c5;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+    }
 
-            @keyframes spin {
-                  to {
-                        transform: rotate(360deg);
-                  }
-            }
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
-            #history-popup {
-                  position: fixed;
-                  top: 0;
-                  left: 0;
-                  width: 100vw;
-                  height: 100vh;
-                  background: rgba(0, 0, 0, 0.7);
-                  display: none;
-                  align-items: center;
-                  justify-content: center;
-                  z-index: 999;
-            }
+    #history-popup {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: rgba(0, 0, 0, 0.7);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 999;
+    }
 
-            #history-popup-content {
-                  background: #1a202c;
-                  color: white;
-                  padding: 20px;
-                  border-radius: 8px;
-                  max-height: 80vh;
-                  overflow-y: auto;
-                  width: 90%;
-                  max-width: 600px;
-            }
-      </style>
+    #history-popup-content {
+      background: #1a202c;
+      color: white;
+      padding: 20px;
+      border-radius: 8px;
+      max-height: 80vh;
+      overflow-y: auto;
+      width: 90%;
+      max-width: 600px;
+    }
+  </style>
 </head>
 
 <body class="bg-black min-h-screen text-white">
 
-      <!-- Navbar -->
-      <nav
-            class="fixed  top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md backdrop-saturate-150 p-4 shadow-md flex justify-between items-center rounded-b-l ">
-            <!-- <h1 class="text-xl font-bold text-teal-500">REST API Tool</h1> -->
-            <img src="./logo_myportfolio.png" alt="REST API Tool Logo"
-                  class="h-10 w-10 rounded-full bg-transparent object-contain" />
+  <!-- Navbar -->
+  <nav
+    class="fixed  top-0 left-0 w-full z-50 bg-gray-900/50 backdrop-blur-md backdrop-saturate-150 p-4 shadow-md flex justify-between items-center rounded-b-lg ">
+    <!-- <h1 class="text-xl font-bold text-teal-500">REST API Tool</h1> -->
+     <img src="./logo_myportfolio.png" alt="REST API Tool Logo" class="h-10 w-10 rounded-full bg-transparent object-contain" />
 
-            <ul class="flex gap-6 text-white">
-                  <li><a href="#" class="hover:text-teal-400 transition">API Testing</a></li>
-                  <li><a href="#" class="hover:text-teal-400 transition">About Us</a></li>
-                  <li><button onclick="showHistory()" class="hover:text-teal-400 transition">History</button></li>
-            </ul>
-      </nav>
+    <ul class="flex gap-6 text-white">
+      <li><a href="#" class="hover:text-teal-400 transition">API Testing</a></li>
+      <li><a href="#" class="hover:text-teal-400 transition">About Us</a></li>
+      <li><button onclick="showHistory()" class="hover:text-teal-400 transition">History</button></li>
+    </ul>
+  </nav>
 
-      <!-- History Popup -->
-      <div id="history-popup" class="flex">
-            <div id="history-popup-content">
-                  <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-bold">Request History</h2>
-                        <p class="font-bold text-yellow-500 ">⚠ History will be deleted after 3 days.</p>
-                        <button onclick="closeHistory()" class="text-red-400 hover:text-red-600 text-lg">✖</button>
-                  </div>
-                  <ul id="history-list" class="text-sm space-y-2 text-green-400"></ul>
-            </div>
+  <!-- History Popup -->
+  <div id="history-popup" class="flex">
+    <div id="history-popup-content">
+      <div class="flex justify-between items-center mb-4">
+        <h2 class="text-xl font-bold">Request History</h2>
+        <p class="font-bold text-yellow-500 ">⚠ History will be deleted after 3 days.</p>
+        <button onclick="closeHistory()" class="text-red-400 hover:text-red-600 text-lg">✖</button>
+      </div>
+      <ul id="history-list" class="text-sm space-y-2 text-green-400"></ul>
+    </div>
+  </div>
+
+  <!-- Main Content -->
+  <div class="p-6 flex flex-wrap md:flex-nowrap gap-6 pt-20">
+    <!-- Left Panel -->
+    <div class="w-full md:w-1/2 order-1 md:order-1 bg-gray-950 p-6 rounded shadow border border-gray-800">
+      <h2 class="text-2xl font-bold mb-4 text-teal-500">REST API Testing Tool</h2>
+
+      <div class="mb-4">
+        <label class="block font-semibold">Authorization Type</label>
+        <select id="auth-type" class="w-full p-2 border rounded bg-black text-white">
+          <option value="none">None</option>
+          <option value="jwt">JWT (Bearer)</option>
+          <option value="api-key">API Key</option>
+        </select>
       </div>
 
-      <!-- Main Content -->
-      <div class="p-6 flex flex-wrap md:flex-nowrap gap-6 pt-20">
-            <!-- Left Panel -->
-            <div class="w-full md:w-1/2 order-1 md:order-1 bg-gray-950 p-6 rounded shadow border border-gray-800">
-                  <h2 class="text-2xl font-bold mb-4 text-teal-500">REST API Testing Tool</h2>
-
-                  <div class="mb-4">
-                        <label class="block font-semibold">Authorization Type</label>
-                        <select id="auth-type" class="w-full p-2 border rounded bg-black text-white">
-                              <option value="none">None</option>
-                              <option value="jwt">JWT (Bearer)</option>
-                              <option value="api-key">API Key</option>
-                        </select>
-                  </div>
-
-                  <div id="auth-token-container" class="mb-4 hidden">
-                        <label class="block font-semibold">Authorization Token</label>
-                        <input id="auth-token" type="text" class="bg-black w-full p-2 border rounded text-white"
-                              placeholder="Enter token here..." />
-                  </div>
-
-                  <div class="mb-4">
-                        <label class="block font-semibold">Method</label>
-                        <select id="method" class="w-full p-2 border rounded bg-black text-white">
-                              <option>GET</option>
-                              <option>POST</option>
-                              <option>PUT</option>
-                              <option>DELETE</option>
-                        </select>
-                  </div>
-
-                  <!-- <div class="mb-4">
-                        <label class="block font-semibold">URL</label>
-                        <input id="url" type="text" placeholder="https://api.example.com/data"
-                              class="bg-black w-full p-2 border rounded text-white" />
-                  </div> -->
-                  <div class="mb-4">
-                        <label class="block font-semibold">URL</label>
-                        <div class="flex gap-2">
-                              <input id="url" type="text" placeholder="https://api.example.com/data"
-                                    class="bg-black w-full p-2 border rounded text-white" />
-                              <button id="send-btn" onclick="sendRequest()"
-                                    class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex-shrink-0">
-                                    Send
-                              </button>
-                              <div id="loading-spinner" class="spinner hidden"></div>
-                        </div>
-                  </div>
-
-
-                  <div class="mb-4">
-                        <label class="block font-semibold">Headers (JSON)</label>
-                        <textarea id="headers" rows="3" class="w-full p-2 border rounded bg-black text-white"
-                              placeholder='{"Content-Type": "application/json"}'></textarea>
-                  </div>
-
-                  <div class="mb-4">
-                        <div class="flex justify-between items-center">
-                              <label class="block font-semibold">Custom Fields</label>
-                              <button onclick="addField()" class="text-green-400 hover:text-green-600">➕</button>
-                        </div>
-                        <div id="fields-container" class="space-y-2 mt-2"></div>
-                  </div>
-
-                  <!-- <div class="flex items-center gap-2">
-                        <button id="send-btn" onclick="sendRequest()"
-                              class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center">
-                              Send Request
-                        </button>
-                        <div id="loading-spinner" class="spinner hidden"></div>
-                  </div> -->
-            </div>
-
-            <!-- Right Panel -->
-            <div class="w-full md:w-1/2 order-2 md:order-2 bg-gray-900 p-6 rounded shadow border border-gray-700">
-                  <h2 class="text-xl font-semibold">Response</h2>
-                  <div id="response-status" class="mt-2 font-mono text-sm text-gray-300"></div>
-                  <div id="time-display" class="text-xs text-gray-400 mb-2"></div>
-                  <pre id="response-body"
-                        class="mt-2 bg-gray-800 p-4 rounded text-sm overflow-auto max-h-[70vh] text-white whitespace-pre-wrap"></pre>
-            </div>
+      <div id="auth-token-container" class="mb-4 hidden">
+        <label class="block font-semibold">Authorization Token</label>
+        <input id="auth-token" type="text" class="bg-black w-full p-2 border rounded text-white"
+          placeholder="Enter token here..." />
       </div>
 
-   <script>
-      function showHistory() {
-            const list = document.getElementById('history-list');
-            list.innerHTML = '';
+      <div class="mb-4">
+        <label class="block font-semibold">Method</label>
+        <select id="method" class="w-full p-2 border rounded bg-black text-white">
+          <option>GET</option>
+          <option>POST</option>
+          <option>PUT</option>
+          <option>DELETE</option>
+        </select>
+      </div>
 
-            let history = JSON.parse(localStorage.getItem('requestHistory') || '[]');
-            const now = Date.now();
-            const threeDays = 3 * 24 * 60 * 60 * 1000;
+      <div class="mb-4">
+        <label class="block font-semibold">URL</label>
+        <input id="url" type="text" placeholder="https://api.example.com/data"
+          class="bg-black w-full p-2 border rounded text-white" />
+      </div>
 
-            history = history.filter(entry => now - entry.timestamp <= threeDays);
-            localStorage.setItem('requestHistory', JSON.stringify(history));
+      <div class="mb-4">
+        <label class="block font-semibold">Headers (JSON)</label>
+        <textarea id="headers" rows="3" class="w-full p-2 border rounded bg-black text-white"
+          placeholder='{"Content-Type": "application/json"}'></textarea>
+      </div>
 
-            history.slice().reverse().forEach(entry => {
-                  const li = document.createElement('li');
-                  li.innerHTML = `
-                        <span class="text-green-400">${entry.time}</span> 
-                        <span class="text-yellow-400">${entry.method}</span> 
-                        <span class="text-red-400">${entry.url}</span>
-                  `;
-                  list.appendChild(li);
-            });
+      <div class="mb-4">
+        <div class="flex justify-between items-center">
+          <label class="block font-semibold">Custom Fields</label>
+          <button onclick="addField()" class="text-green-400 hover:text-green-600">➕</button>
+        </div>
+        <div id="fields-container" class="space-y-2 mt-2"></div>
+      </div>
 
-            document.getElementById('history-popup').style.display = 'flex';
-      }
+      <div class="flex items-center gap-2">
+        <button id="send-btn" onclick="sendRequest()"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center">
+          Send Request
+        </button>
+        <div id="loading-spinner" class="spinner hidden"></div>
+      </div>
+    </div>
 
-      function closeHistory() {
-            document.getElementById('history-popup').style.display = 'none';
-      }
+    <!-- Right Panel -->
+    <div class="w-full md:w-1/2 order-2 md:order-2 bg-gray-900 p-6 rounded shadow border border-gray-700">
+      <h2 class="text-xl font-semibold">Response</h2>
+      <div id="response-status" class="mt-2 font-mono text-sm text-gray-300"></div>
+      <div id="time-display" class="text-xs text-gray-400 mb-2"></div>
+      <pre id="response-body"
+        class="mt-2 bg-gray-800 p-4 rounded text-sm overflow-auto max-h-[70vh] text-white whitespace-pre-wrap"></pre>
+    </div>
+  </div>
 
-      function addField(k = '', v = '', t = 'text', checked = true) {
-            const container = document.getElementById('fields-container');
-            const div = document.createElement('div');
-            div.className = 'flex flex-wrap items-center gap-2';
-            div.innerHTML = `
-                  <label class="flex items-center gap-1 text-sm">
-                        <input type="checkbox" class="field-check" ${checked ? 'checked' : ''}/> 
-                  </label>
-                  <input type="text" name="key" class="bg-black border p-2 rounded text-white w-1/4" value="${k}" placeholder="KEY"/>
-                  <select onchange="handleTypeChange(this)" class="bg-black text-white border p-2 rounded">
-                        <option value="text" ${t === 'text' ? 'selected' : ''}>Text</option>
-                        <option value="file" ${t === 'file' ? 'selected' : ''}>File</option>
-                  </select>
-                  <input type="${t}" name="value" class="bg-black border p-2 rounded text-white w-1/4" value="${t === 'text' ? v : ''}" placeholder="VALUES"/>
-                  <button onclick="removeField(this)" class="text-red-500 hover:text-red-700">✖</button>
-            `;
-            container.appendChild(div);
-      }
+  <script>
+    // Show/Hide history
+    function showHistory() {
+      const list = document.getElementById('history-list');
+      list.innerHTML = '';
 
-      function handleTypeChange(sel) {
-            const input = sel.nextElementSibling;
-            const parent = sel.parentNode;
-            const newInput = document.createElement('input');
-            newInput.className = 'bg-black border p-2 rounded text-white w-1/4';
-            newInput.name = 'value';
-            newInput.type = sel.value;
-            parent.replaceChild(newInput, input);
-      }
+      let history = JSON.parse(localStorage.getItem('requestHistory') || '[]');
+      const now = Date.now();
+      const threeDays = 3 * 24 * 60 * 60 * 1000;
 
-      function removeField(btn) {
-            btn.parentElement.remove();
-      }
-
-      // ✅ Timeout Wrapper
-      function fetchWithTimeout(resource, options = {}, timeout = 7000) {
-            return Promise.race([
-                  fetch(resource, options),
-                  new Promise((_, reject) =>
-                        setTimeout(() => reject(new Error("Request Timeout")), timeout)
-                  )
-            ]);
-      }
-
-      async function sendRequest() {
-            const spinner = document.getElementById('loading-spinner');
-            const sendBtn = document.getElementById('send-btn');
-            spinner.classList.remove('hidden');
-            sendBtn.disabled = true;
-
-            const method = document.getElementById('method').value;
-            const url = document.getElementById('url').value.trim();
-            const headersText = document.getElementById('headers').value;
-            const authType = document.getElementById('auth-type').value;
-            const token = document.getElementById('auth-token').value.trim();
-
-            let headers = {};
-            try {
-                  headers = headersText ? JSON.parse(headersText) : {};
-            } catch (e) {
-                  alert("Invalid JSON in headers");
-                  spinner.classList.add('hidden');
-                  sendBtn.disabled = false;
-                  return;
-            }
-
-            if (authType === 'jwt' && token) headers['Authorization'] = `Bearer ${token}`;
-            else if (authType === 'api-key' && token) headers['Authorization'] = `ApiKey ${token}`;
-
-            headers['Connection'] = 'keep-alive'; // ✅ keep connection open
-
-            const fields = document.getElementById('fields-container').children;
-            let useFormData = false;
-            const formData = new FormData();
-            const jsonBody = {};
-
-            for (let field of fields) {
-                  if (!field.querySelector('.field-check')?.checked) continue;
-                  const key = field.querySelector('input[name="key"]')?.value;
-                  const valueElem = field.querySelector('input[name="value"]');
-                  if (!key || !valueElem) continue;
-
-                  if (valueElem.type === 'file') {
-                        useFormData = true;
-                        if (valueElem.files.length > 0) {
-                              formData.append(key, valueElem.files[0]);
-                        }
-                  } else {
-                        formData.append(key, valueElem.value);
-                        jsonBody[key] = valueElem.value;
-                  }
-            }
-
-            const cacheKey = `${method}-${url}-${JSON.stringify(jsonBody)}`; // ✅ cache key
-            const cachedResponse = sessionStorage.getItem(cacheKey);
-            if (cachedResponse) {
-                  document.getElementById('response-status').textContent = 'From Cache';
-                  document.getElementById('response-body').textContent = cachedResponse;
-                  document.getElementById('time-display').textContent = `⏱ (cached) ${new Date().toLocaleTimeString()}`;
-                  spinner.classList.add('hidden');
-                  sendBtn.disabled = false;
-                  return;
-            }
-
-            const options = { method, headers: { ...headers } };
-            if (method !== 'GET') {
-                  if (useFormData) {
-                        options.body = formData;
-                        delete options.headers['Content-Type'];
-                  } else {
-                        options.headers['Content-Type'] = 'application/json';
-                        options.body = JSON.stringify(jsonBody);
-                  }
-            }
-
-            const start = performance.now();
-            try {
-                  const res = await fetchWithTimeout(url, options, 8000); // ✅ 8s timeout
-                  const time = (performance.now() - start).toFixed(2);
-                  const contentType = res.headers.get('content-type');
-                  let responseBody;
-                  if (contentType?.includes('application/json')) {
-                        responseBody = JSON.stringify(await res.json(), null, 2);
-                  } else {
-                        responseBody = await res.text();
-                  }
-
-                  document.getElementById('response-status').textContent =
-                        `Status: ${res.status} (${res.statusText}) | Time: ${time} ms`;
-                  document.getElementById('time-display').textContent = `⏱ ${(time / 1000).toFixed(2)} s | ${new Date().toLocaleTimeString()}`;
-                  document.getElementById('response-body').textContent = responseBody;
-
-                  // ✅ Cache response
-                  if (!useFormData) {
-                        sessionStorage.setItem(cacheKey, responseBody);
-                  }
-
-                  saveHistory({ method, url, time: new Date().toLocaleTimeString(), timestamp: Date.now() });
-
-            } catch (err) {
-                  document.getElementById('response-status').textContent = 'Error';
-                  document.getElementById('response-body').textContent = err.toString();
-            } finally {
-                  spinner.classList.add('hidden');
-                  sendBtn.disabled = false;
-            }
-      }
-
-      function saveHistory(entry) {
-            const history = JSON.parse(localStorage.getItem('requestHistory') || '[]');
-            history.push(entry);
-            if (history.length > 20) history.shift(); // ✅ keep only 20 recent
-            localStorage.setItem('requestHistory', JSON.stringify(history));
-      }
-
-      function saveFormState() {
-            const state = {
-                  authType: document.getElementById('auth-type').value,
-                  authToken: document.getElementById('auth-token').value,
-                  method: document.getElementById('method').value,
-                  url: document.getElementById('url').value,
-                  headers: document.getElementById('headers').value
-            };
-            localStorage.setItem('formState', JSON.stringify(state));
-      }
-
-      function loadFormState() {
-            const state = JSON.parse(localStorage.getItem('formState') || '{}');
-            if (state.authType) document.getElementById('auth-type').value = state.authType;
-            if (state.authToken) document.getElementById('auth-token').value = state.authToken;
-            if (state.method) document.getElementById('method').value = state.method;
-            if (state.url) document.getElementById('url').value = state.url;
-            if (state.headers) document.getElementById('headers').value = state.headers;
-            if (state.authType !== 'none') document.getElementById('auth-token-container').classList.remove('hidden');
-      }
-
-      document.getElementById('auth-type').addEventListener('change', function () {
-            document.getElementById('auth-token-container').classList.toggle('hidden', this.value === 'none');
+      history = history.filter(entry => {
+        if (now - entry.timestamp > threeDays) {
+          alert('Some entries older than 3 days were deleted.');
+          return false;
+        }
+        return true;
       });
 
-      window.onload = () => {
-            loadFormState();
-            const savedFields = JSON.parse(localStorage.getItem('customFields') || '[]');
-            if (savedFields.length === 0) addField();
-            else savedFields.forEach(f => addField(f.k, f.v, f.t, f.c));
-      };
+      localStorage.setItem('requestHistory', JSON.stringify(history));
 
-      window.onbeforeunload = () => {
-            saveFormState();
-            const fields = [];
-            document.querySelectorAll('#fields-container > div').forEach(div => {
-                  fields.push({
-                        k: div.querySelector('input[name="key"]').value,
-                        v: div.querySelector('input[name="value"]')?.value || '',
-                        t: div.querySelector('select').value,
-                        c: div.querySelector('.field-check').checked
-                  });
-            });
-            localStorage.setItem('customFields', JSON.stringify(fields));
-      };
-
-      document.addEventListener('keydown', function (e) {
-            if (e.ctrlKey && e.key === 'Enter') {
-                  e.preventDefault();
-                  sendRequest();
-            }
+      history.reverse().forEach(entry => {
+        const li = document.createElement('li');
+        li.innerHTML = `
+          <span class="text-green-400">${entry.time}</span> 
+          <span class="text-yellow-400">${entry.method}</span> 
+          <span class="text-red-400">${entry.url}</span>
+          `;
+        list.appendChild(li);
       });
-</script>
 
+      document.getElementById('history-popup').style.display = 'flex';
+    }
+
+    function closeHistory() {
+      document.getElementById('history-popup').style.display = 'none';
+    }
+
+    function addField(k = '', v = '', t = 'text', checked = true) {
+      const container = document.getElementById('fields-container');
+      const div = document.createElement('div');
+      div.className = 'flex flex-wrap items-center gap-2';
+
+      div.innerHTML = `
+        <label class="flex items-center gap-1 text-sm">
+          <input type="checkbox" class="field-check" ${checked ? 'checked' : ''}/> 
+        </label>
+        <input type="text" name="key" class="bg-black border p-2 rounded text-white w-1/4" value="${k}" placeholder="KEY"/>
+        <select onchange="handleTypeChange(this)" class="bg-black text-white border p-2 rounded">
+          <option value="text" ${t === 'text' ? 'selected' : ''}>Text</option>
+          <option value="file" ${t === 'file' ? 'selected' : ''}>File</option>
+        </select>
+        <input type="${t}" name="value" class="bg-black border p-2 rounded text-white w-1/4" value="${t === 'text' ? v : ''}" placeholder="VALUES"/>
+        <button onclick="removeField(this)" class="text-red-500 hover:text-red-700">✖</button>
+      `;
+
+      container.appendChild(div);
+    }
+
+    function handleTypeChange(sel) {
+      const input = sel.nextElementSibling;
+      const parent = sel.parentNode;
+
+      const newInput = document.createElement('input');
+      newInput.className = 'bg-black border p-2 rounded text-white w-1/4';
+      newInput.name = 'value';
+      newInput.type = sel.value;
+
+      parent.replaceChild(newInput, input);
+    }
+
+    function removeField(btn) {
+      btn.parentElement.remove();
+    }
+
+    async function sendRequest() {
+      const spinner = document.getElementById('loading-spinner');
+      const sendBtn = document.getElementById('send-btn');
+      spinner.classList.remove('hidden');
+      sendBtn.disabled = true;
+
+      const method = document.getElementById('method').value;
+      const url = document.getElementById('url').value;
+      const headersText = document.getElementById('headers').value;
+      const authType = document.getElementById('auth-type').value;
+      const token = document.getElementById('auth-token').value.trim();
+
+      let headers = {};
+      try {
+        headers = headersText ? JSON.parse(headersText) : {};
+      } catch (e) {
+        alert("Invalid JSON in headers");
+        return;
+      }
+
+      if (authType === 'jwt' && token) headers['Authorization'] = `Bearer ${token}`;
+      else if (authType === 'api-key' && token) headers['Authorization'] = `ApiKey ${token}`;
+
+      const fields = document.getElementById('fields-container').children;
+      let useFormData = false;
+      const formData = new FormData();
+      const jsonBody = {};
+
+      for (let field of fields) {
+        if (!field.querySelector('.field-check')?.checked) continue;
+        const key = field.querySelector('input[name="key"]')?.value;
+        const valueElem = field.querySelector('input[name="value"]');
+        if (!key || !valueElem) continue;
+
+        if (valueElem.type === 'file') {
+          useFormData = true;
+          if (valueElem.files.length > 0) {
+            formData.append(key, valueElem.files[0]);
+          }
+        } else {
+          formData.append(key, valueElem.value);
+          jsonBody[key] = valueElem.value;
+        }
+      }
+
+      const options = { method, headers: { ...headers } };
+      if (method !== 'GET') {
+        if (useFormData) {
+          options.body = formData;
+          delete options.headers['Content-Type'];
+        } else {
+          options.headers['Content-Type'] = 'application/json';
+          options.body = JSON.stringify(jsonBody);
+        }
+      }
+
+      const start = performance.now();
+      try {
+        const res = await fetch(url, options);
+        const time = (performance.now() - start).toFixed(2);
+        const contentType = res.headers.get('content-type');
+        let responseBody;
+        if (contentType?.includes('application/json')) {
+          responseBody = JSON.stringify(await res.json(), null, 2);
+        } else {
+          responseBody = await res.text();
+        }
+
+        document.getElementById('response-status').textContent =
+          `Status: ${res.status} (${res.statusText}) | Time: ${time} ms`;
+        document.getElementById('time-display').textContent = `⏱ ${(time / 1000).toFixed(2)} s | ${new Date().toLocaleTimeString()}`;
+        document.getElementById('response-body').textContent = responseBody;
+
+        saveHistory({ method, url, time: new Date().toLocaleTimeString(), timestamp: Date.now() });
+
+      } catch (err) {
+        document.getElementById('response-status').textContent = 'Error';
+        document.getElementById('response-body').textContent = err.toString();
+      } finally {
+        spinner.classList.add('hidden');
+        sendBtn.disabled = false;
+      }
+    }
+
+    function saveHistory(entry) {
+      const history = JSON.parse(localStorage.getItem('requestHistory') || '[]');
+      history.push(entry);
+      localStorage.setItem('requestHistory', JSON.stringify(history));
+    }
+
+    function saveFormState() {
+      const state = {
+        authType: document.getElementById('auth-type').value,
+        authToken: document.getElementById('auth-token').value,
+        method: document.getElementById('method').value,
+        url: document.getElementById('url').value,
+        headers: document.getElementById('headers').value
+      };
+      localStorage.setItem('formState', JSON.stringify(state));
+    }
+
+    function loadFormState() {
+      const state = JSON.parse(localStorage.getItem('formState') || '{}');
+      if (state.authType) document.getElementById('auth-type').value = state.authType;
+      if (state.authToken) document.getElementById('auth-token').value = state.authToken;
+      if (state.method) document.getElementById('method').value = state.method;
+      if (state.url) document.getElementById('url').value = state.url;
+      if (state.headers) document.getElementById('headers').value = state.headers;
+      if (state.authType !== 'none') document.getElementById('auth-token-container').classList.remove('hidden');
+    }
+
+    document.getElementById('auth-type').addEventListener('change', function () {
+      document.getElementById('auth-token-container').classList.toggle('hidden', this.value === 'none');
+    });
+
+    window.onload = () => {
+      loadFormState();
+      const savedFields = JSON.parse(localStorage.getItem('customFields') || '[]');
+      if (savedFields.length === 0) addField();
+      else savedFields.forEach(f => addField(f.k, f.v, f.t, f.c));
+    };
+
+    window.onbeforeunload = () => {
+      saveFormState();
+      const fields = [];
+      document.querySelectorAll('#fields-container > div').forEach(div => {
+        fields.push({
+          k: div.querySelector('input[name="key"]').value,
+          v: div.querySelector('input[name="value"]')?.value || '',
+          t: div.querySelector('select').value,
+          c: div.querySelector('.field-check').checked
+        });
+      });
+      localStorage.setItem('customFields', JSON.stringify(fields));
+    };
+  </script>
 </body>
 
-</html>>
+</html>
