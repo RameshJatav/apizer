@@ -12,7 +12,8 @@
 
   <!-- Social Sharing (Open Graph + Twitter) -->
   <meta property="og:title" content="Apizer – Smart REST API Testing Tool" />
-  <meta property="og:description" content="Test your APIs smarter and faster with Apizer. Free, fast and intuitive API request tool." />
+  <meta property="og:description"
+    content="Test your APIs smarter and faster with Apizer. Free, fast and intuitive API request tool." />
   <meta property="og:image" content="https://your-image-link.com/apizer-preview.png" />
   <meta property="og:url" content="https://your-username.github.io/apizer" />
   <meta name="twitter:card" content="summary_large_image">
@@ -92,7 +93,8 @@
   <nav
     class="fixed  top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md backdrop-saturate-150 p-4 shadow-md flex justify-between items-center rounded-b-lg ">
     <!-- <h1 class="text-xl font-bold text-teal-500">REST API Tool</h1> -->
-     <a href="https://portfolio-web-six-mu.vercel.app"><img src="./logo_myportfolio.png" alt="REST API Tool Logo" class="h-10 w-10 rounded-full bg-transparent object-contain" /></a>
+    <a href="https://portfolio-web-six-mu.vercel.app"><img src="./logo_myportfolio.png" alt="REST API Tool Logo"
+        class="h-10 w-10 rounded-full bg-transparent object-contain" /></a>
 
     <ul class="flex gap-6 text-white">
       <li><a href="#" class="hover:text-teal-400 transition">API Testing</a></li>
@@ -102,21 +104,23 @@
   </nav>
 
   <!-- History Popup -->
-<div id="history-popup" class="fixed inset-0 bg-black/40 flex justify-center items-center z-40">
-  <div id="history-popup-content" class="bg-gray-900 text-white w-full max-w-2xl h-[80vh] rounded-lg overflow-hidden flex flex-col relative">
-    
-    <!-- Header (Fixed inside the popup) -->
-    <div class="absolute top-0 left-0 w-full z-10 flex justify-between items-center bg-teal-600/50 backdrop-blur-lg backdrop-saturate-150 px-4 py-2 shadow-md">
-      <h2 class="text-xl font-bold">Request History</h2>
-      <p class="font-bold text-red-300">⚠ History will be deleted after 3 days.</p>
-      <button onclick="closeHistory()" class="text-red-400 hover:text-red-600 text-lg">✖</button>
-    </div>
+  <div id="history-popup" class="fixed inset-0 bg-black/40 flex justify-center items-center z-40">
+    <div id="history-popup-content"
+      class="bg-gray-900 text-white w-full max-w-2xl h-[80vh] rounded-lg overflow-hidden flex flex-col relative">
 
-    <ul id="history-list" class="overflow-y-auto flex-1 pt-20 px-4 space-y-2 text-green-400 text-sm">
-      <!-- History items will go here -->
-    </ul>
+      <!-- Header (Fixed inside the popup) -->
+      <div
+        class="absolute top-0 left-0 w-full z-10 flex justify-between items-center bg-teal-600/50 backdrop-blur-lg backdrop-saturate-150 px-4 py-2 shadow-md">
+        <h2 class="text-xl font-bold">Request History</h2>
+        <p class="font-bold text-red-300">⚠ History will be deleted after 3 days.</p>
+        <button onclick="closeHistory()" class="text-red-400 hover:text-red-600 text-lg">✖</button>
+      </div>
+
+      <ul id="history-list" class="overflow-y-auto flex-1 pt-20 px-4 space-y-2 text-green-400 text-sm">
+        <!-- History items will go here -->
+      </ul>
+    </div>
   </div>
-</div>
 
   <!-- Main Content -->
   <div class="p-6 flex flex-wrap md:flex-nowrap gap-6 pt-20">
@@ -149,13 +153,8 @@
         </select>
       </div>
 
-   <input
-  id="url"
-  type="url"
-  placeholder="https://api.example.com/data"
-  class="bg-black w-full p-2 border rounded text-white"
-  required
-/>
+      <input id="url" type="url" placeholder="https://api.example.com/data"
+        class="bg-black w-full p-2 border rounded text-white" required />
       <div class="mb-4">
         <label class="block font-semibold">Headers (JSON)</label>
         <textarea id="headers" rows="3" class="w-full p-2 border rounded bg-black text-white"
@@ -347,6 +346,15 @@
       }
     }
 
+
+    document.addEventListener('keydown', function (event) {
+      if (event.ctrlKey && event.key === 'Enter') {
+        const sendBtn = document.getElementById('send-btn');
+        if (!sendBtn.disabled) {
+          sendBtn.click(); 
+        }
+      }
+    });
     function saveHistory(entry) {
       const history = JSON.parse(localStorage.getItem('requestHistory') || '[]');
       history.push(entry);
