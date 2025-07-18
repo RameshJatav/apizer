@@ -152,40 +152,48 @@
           <option>DELETE</option>
         </select>
       </div>
-
       <input id="url" type="url" placeholder="https://api.example.com/data"
         class="bg-black w-full p-2 border rounded text-white" required />
-      <div class="mb-4">
-        <label class="block font-semibold">Headers (JSON)</label>
-        <textarea id="headers" rows="3" class="w-full p-2 border rounded bg-black text-white"
-          placeholder='{"Content-Type": "application/json"}'></textarea>
-      </div>
 
-      <div class="mb-4">
-        <div class="flex justify-between items-center">
-          <label class="block font-semibold">Custom Fields</label>
-          <button onclick="addField()" class="text-green-400 hover:text-green-600">➕</button>
+      <!-- 🔻 Add this exactly below the input -->
+      <div id="url-error" class="hidden bg-red-500/20 text-red-400 p-2 mt-2 rounded relative overflow-hidden">
+        <span class="block font-medium">⚠ Please enter a valid URL starting with http:// or https://</span>
+        <div id="error-progress" class="absolute bottom-0 left-0 h-1 bg-red-500 origin-right scale-x-0 transition-transform duration-[5000ms] ease-linear">
         </div>
-        <div id="fields-container" class="space-y-2 mt-2"></div>
       </div>
 
-      <div class="flex items-center gap-2">
-        <button id="send-btn" onclick="sendRequest()"
-          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center">
-          Send Request
-        </button>
-        <div id="loading-spinner" class="spinner hidden"></div>
-      </div>
+
+
+      <label class="block font-semibold">Headers (JSON)</label>
+      <textarea id="headers" rows="3" class="w-full p-2 border rounded bg-black text-white"
+        placeholder='{"Content-Type": "application/json"}'></textarea>
     </div>
 
-    <!-- Right Panel -->
-    <div class="w-full md:w-1/2 order-2 md:order-2 bg-gray-900 p-6 rounded shadow border border-gray-700">
-      <h2 class="text-xl font-semibold">Response</h2>
-      <div id="response-status" class="mt-2 font-mono text-sm text-gray-300"></div>
-      <div id="time-display" class="text-xs text-gray-400 mb-2"></div>
-      <pre id="response-body"
-        class="mt-2 bg-gray-800 p-4 rounded text-sm overflow-auto max-h-[70vh] text-white whitespace-pre-wrap"></pre>
+    <div class="mb-4">
+      <div class="flex justify-between items-center">
+        <label class="block font-semibold">Custom Fields</label>
+        <button onclick="addField()" class="text-green-400 hover:text-green-600">➕</button>
+      </div>
+      <div id="fields-container" class="space-y-2 mt-2"></div>
     </div>
+
+    <div class="flex items-center gap-2">
+      <button id="send-btn" onclick="sendRequest()"
+        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center">
+        Send Request
+      </button>
+      <div id="loading-spinner" class="spinner hidden"></div>
+    </div>
+  </div>
+
+  <!-- Right Panel -->
+  <div class="w-full md:w-1/2 order-2 md:order-2 bg-gray-900 p-6 rounded shadow border border-gray-700">
+    <h2 class="text-xl font-semibold">Response</h2>
+    <div id="response-status" class="mt-2 font-mono text-sm text-gray-300"></div>
+    <div id="time-display" class="text-xs text-gray-400 mb-2"></div>
+    <pre id="response-body"
+      class="mt-2 bg-gray-800 p-4 rounded text-sm overflow-auto max-h-[70vh] text-white whitespace-pre-wrap"></pre>
+  </div>
   </div>
 
   <script>
@@ -271,18 +279,27 @@
       const method = document.getElementById('method').value;
       // const url = document.getElementById('url').value;
       const url = document.getElementById('url').value.trim();
-      
-      const headersText = document.getElementById('headers').value;
-      const authType = document.getElementById('auth-type').value;
-      const token = document.getElementById('auth-token').value.trim();
+      const urlErrorBox = document.getElementById('url-error');
+      const errorProgress = document.getElementById('error-progress');
 
-      let headers = {};
-      try {
-        headers = headersText ? JSON.parse(headersText) : {};
-      } catch (e) {
-        alert("Invalid JSON in headers");
+      // ✅ Validate URL
+      if (!/^https?:\/\/.+/.test(url)) {
+        urlErrorBox.classList.remove('hidden');
+        errorProgress.classList.remove('scale-x-0');
+        errorProgress.classList.add('scale-x-100');
+
+        // Hide after 5s
+        setTimeout(() => {
+          urlErrorBox.classList.add('hidden');
+          errorProgress.classList.remove('scale-x-100');
+          errorProgress.classList.add('scale-x-0');
+        }, 5000);
+
+        spinner.classList.add('hidden');
+        sendBtn.disabled = false;
         return;
       }
+
 
       if (authType === 'jwt' && token) headers['Authorization'] = `Bearer ${token}`;
       else if (authType === 'api-key' && token) headers['Authorization'] = `ApiKey ${token}`;
