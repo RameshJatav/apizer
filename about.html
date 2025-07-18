@@ -9,6 +9,30 @@
   <meta name="author" content="Ramesh Jatav" />
   <link rel="icon" href="./logo_myportfolio.png" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+     ::-webkit-scrollbar {
+    width: 6px; /* thinner scrollbar */
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #1f2937; /* dark track (gray-800) */
+  }
+
+  ::-webkit-scrollbar-thumb {
+    background-color: #14b8a6; /* teal-500 */
+    border-radius: 4px;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    background-color: #0d9488; /* teal-600 on hover */
+  }
+
+  /* For Firefox */
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: #14b8a6 #1f2937;
+  }
+  </style>
 </head>
 
 <body class="bg-black text-white min-h-screen font-sans">
@@ -120,6 +144,12 @@
       </div>
 
 </footer>
+ <script>
+        // Optional scroll animation or custom JS can be added here
+        document.addEventListener('scroll', () => {
+            // Simple scroll-triggered animation logic can be added
+        });
+    </script>
 </body>
 
 </html>
