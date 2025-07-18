@@ -153,8 +153,12 @@
         </select>
       </div>
 
-      <input id="url" type="url" placeholder="https://api.example.com/data"
-        class="bg-black w-full p-2 border rounded text-white" required />
+      <input id="url" type="url" placeholder="https://api.example.com/data" class="bg-black w-full p-2 border rounded text-white" required />
+      <div id="url-error" class="hidden bg-red-500/20 text-red-400 p-2 mt-2 rounded relative overflow-hidden">
+        <span class="block font-medium">⚠ Please enter a valid URL starting with http:// or https://</span>
+        <div id="error-progress" class="absolute bottom-0 left-0 h-1 bg-red-500 origin-right scale-x-0 transition-transform duration-5000 ease-linear"></div>
+      </div>
+
       <div class="mb-4">
         <label class="block font-semibold">Headers (JSON)</label>
         <textarea id="headers" rows="3" class="w-full p-2 border rounded bg-black text-white"
@@ -262,25 +266,24 @@
       btn.parentElement.remove();
     }
 
-    async function sendRequest() {
-      const spinner = document.getElementById('loading-spinner');
-      const sendBtn = document.getElementById('send-btn');
-      spinner.classList.remove('hidden');
-      sendBtn.disabled = true;
+  async function sendRequest() {
+  const spinner = document.getElementById('loading-spinner');
+  const sendBtn = document.getElementById('send-btn');
+  spinner.classList.remove('hidden');
+  sendBtn.disabled = true;
 
-      const method = document.getElementById('method').value;
-      const url = document.getElementById('url').value;
-      const headersText = document.getElementById('headers').value;
-      const authType = document.getElementById('auth-type').value;
-      const token = document.getElementById('auth-token').value.trim();
+  const method = document.getElementById('method').value;
+  const url = document.getElementById('url').value.trim();
 
-      let headers = {};
-      try {
-        headers = headersText ? JSON.parse(headersText) : {};
-      } catch (e) {
-        alert("Invalid JSON in headers");
-        return;
-      }
+  // ✅ URL validation added here
+  if (!/^https?:\/\/.+/.test(url)) {
+    alert("Please enter a valid URL starting with http:// or https://");
+    spinner.classList.add('hidden');
+    sendBtn.disabled = false;
+    return;
+  }
+
+  const headersText = document.getElementById('headers').value;
 
       if (authType === 'jwt' && token) headers['Authorization'] = `Bearer ${token}`;
       else if (authType === 'api-key' && token) headers['Authorization'] = `ApiKey ${token}`;
@@ -351,7 +354,7 @@
       if (event.ctrlKey && event.key === 'Enter') {
         const sendBtn = document.getElementById('send-btn');
         if (!sendBtn.disabled) {
-          sendBtn.click(); 
+          sendBtn.click();
         }
       }
     });
@@ -409,7 +412,7 @@
 
 
 
-    
+
   </script>
 
   <script type="application/ld+json">
