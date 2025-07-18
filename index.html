@@ -152,48 +152,47 @@
           <option>DELETE</option>
         </select>
       </div>
+
       <input id="url" type="url" placeholder="https://api.example.com/data"
         class="bg-black w-full p-2 border rounded text-white" required />
+      <div class="mb-4">
 
-      <!-- 🔻 Add this exactly below the input -->
-      <div id="url-error" class="hidden bg-red-500/20 text-red-400 p-2 mt-2 rounded relative overflow-hidden">
-        <span class="block font-medium">⚠ Please enter a valid URL starting with http:// or https://</span>
-        <div id="error-progress" class="absolute bottom-0 left-0 h-1 bg-red-500 origin-right scale-x-0 transition-transform duration-[5000ms] ease-linear">
+<!-- 🔻 Add this exactly below the input -->
+<div id="url-error" class="hidden bg-red-500/20 text-red-400 p-2 mt-2 rounded relative overflow-hidden">
+  <span class="block font-medium">⚠ Please enter a valid URL starting with http:// or https://</span>
+  <div id="error-progress" class="absolute bottom-0 left-0 h-1 bg-red-500 origin-right scale-x-0 transition-transform duration-[5000ms] ease-linear"></div>
+</div>
+
+        <label class="block font-semibold">Headers (JSON)</label>
+        <textarea id="headers" rows="3" class="w-full p-2 border rounded bg-black text-white"
+          placeholder='{"Content-Type": "application/json"}'></textarea>
+      </div>
+
+      <div class="mb-4">
+        <div class="flex justify-between items-center">
+          <label class="block font-semibold">Custom Fields</label>
+          <button onclick="addField()" class="text-green-400 hover:text-green-600">➕</button>
         </div>
+        <div id="fields-container" class="space-y-2 mt-2"></div>
       </div>
 
-
-
-      <label class="block font-semibold">Headers (JSON)</label>
-      <textarea id="headers" rows="3" class="w-full p-2 border rounded bg-black text-white"
-        placeholder='{"Content-Type": "application/json"}'></textarea>
-    </div>
-
-    <div class="mb-4">
-      <div class="flex justify-between items-center">
-        <label class="block font-semibold">Custom Fields</label>
-        <button onclick="addField()" class="text-green-400 hover:text-green-600">➕</button>
+      <div class="flex items-center gap-2">
+        <button id="send-btn" onclick="sendRequest()"
+          class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center">
+          Send Request
+        </button>
+        <div id="loading-spinner" class="spinner hidden"></div>
       </div>
-      <div id="fields-container" class="space-y-2 mt-2"></div>
     </div>
 
-    <div class="flex items-center gap-2">
-      <button id="send-btn" onclick="sendRequest()"
-        class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 flex items-center">
-        Send Request
-      </button>
-      <div id="loading-spinner" class="spinner hidden"></div>
+    <!-- Right Panel -->
+    <div class="w-full md:w-1/2 order-2 md:order-2 bg-gray-900 p-6 rounded shadow border border-gray-700">
+      <h2 class="text-xl font-semibold">Response</h2>
+      <div id="response-status" class="mt-2 font-mono text-sm text-gray-300"></div>
+      <div id="time-display" class="text-xs text-gray-400 mb-2"></div>
+      <pre id="response-body"
+        class="mt-2 bg-gray-800 p-4 rounded text-sm overflow-auto max-h-[70vh] text-white whitespace-pre-wrap"></pre>
     </div>
-  </div>
-
-  <!-- Right Panel -->
-  <div class="w-full md:w-1/2 order-2 md:order-2 bg-gray-900 p-6 rounded shadow border border-gray-700">
-    <h2 class="text-xl font-semibold">Response</h2>
-    <div id="response-status" class="mt-2 font-mono text-sm text-gray-300"></div>
-    <div id="time-display" class="text-xs text-gray-400 mb-2"></div>
-    <pre id="response-body"
-      class="mt-2 bg-gray-800 p-4 rounded text-sm overflow-auto max-h-[70vh] text-white whitespace-pre-wrap"></pre>
-  </div>
   </div>
 
   <script>
