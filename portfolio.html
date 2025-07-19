@@ -10,6 +10,50 @@
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <style>
+
+
+     #response-body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #response-body::-webkit-scrollbar-thumb {
+      background: #4fd1c5;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2dd4bf;
+      /* teal color */
+      border-radius: 10px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+
+    .spinner {
+      border: 3px solid transparent;
+      border-top-color: #4fd1c5;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
+
+
     body {
       font-family: 'Orbitron', sans-serif;
       scroll-behavior: smooth;
@@ -72,7 +116,7 @@
     <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">About Me</h3>
     <div class="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-10">
       <div class="flex-shrink-0">
-        <img src="images/ramesh.jpg" alt="Ramesh Jatav" class="w-48 h-48 object-cover rounded-full border-4 border-cyan-400 shadow-lg">
+        <img src="./gallery/ph2.jpg" alt="Ramesh Jatav" class="w-48 h-48 object-cover rounded-full border-4 border-cyan-400 shadow-lg">
       </div>
       <div class="text-gray-200 text-lg space-y-4">
         <p>Hello! I'm <span class="text-cyan-400 font-semibold">Ramesh Jatav</span> from Malakhera, Alwar (Rajasthan), belonging to a middle‑class family.</p>

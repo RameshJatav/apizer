@@ -7,6 +7,47 @@
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
   <style>
+
+    #response-body::-webkit-scrollbar {
+      width: 8px;
+    }
+
+    #response-body::-webkit-scrollbar-thumb {
+      background: #4fd1c5;
+      border-radius: 10px;
+    }
+
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: transparent;
+    }
+
+    ::-webkit-scrollbar-thumb {
+      background: #2dd4bf;
+      /* teal color */
+      border-radius: 10px;
+      border: 2px solid transparent;
+      background-clip: content-box;
+    }
+
+    .spinner {
+      border: 3px solid transparent;
+      border-top-color: #4fd1c5;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      animation: spin 1s linear infinite;
+    }
+
+    @keyframes spin {
+      to {
+        transform: rotate(360deg);
+      }
+    }
+
     body {
       font-family: 'Orbitron', sans-serif;
       background-color: #0f0f1b;
@@ -46,10 +87,10 @@
     <nav class="space-x-4 text-white">
       <!-- Desktop Navigation -->
       <div class="hidden md:flex space-x-4">
-        <a href="index.html#about" class="hover:text-cyan-400">About</a>
-        <a href="index.html#projects" class="hover:text-cyan-400">Projects</a>
-        <a href="gallery.html" class="hover:text-cyan-400">Gallery</a>
-        <a href="index.html#contact" class="hover:text-cyan-400">Contact</a>
+        <a href="portfolio.html#about" class="hover:text-cyan-400">About</a>
+        <a href="portfolio.html#projects" class="hover:text-cyan-400">Projects</a>
+        <a href="#" class="hover:text-cyan-400">Gallery</a>
+        <a href="portfolio.html#contact" class="hover:text-cyan-400">Contact</a>
       </div>
       <!-- Mobile: only Home -->
       <div class="md:hidden">
