@@ -2,214 +2,189 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ramesh Jatav</title>
-  <!-- Tailwind CSS CDN -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&family=Inter&display=swap" rel="stylesheet">
-  <style>
-    body {
-      font-family: 'Inter', sans-serif;
-      scroll-behavior: smooth;
-      background-color: #0f0f1b;
-      color: #f0f0f0;
-    }
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Ramesh Jatav</title>
 
-    .orbit {
-      font-family: 'Orbitron', sans-serif;
-    }
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
 
-    .glow {
-      animation: glow 1.5s infinite alternate;
-    }
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
 
-    @keyframes glow {
-      0% {
-        box-shadow: 0 0 5px #0ff;
-      }
+    <!-- AOS CSS -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
-      100% {
-        box-shadow: 0 0 20px #0ff;
-      }
-    }
+    <style>
+        body {
+            font-family: 'Orbitron', sans-serif;
+            scroll-behavior: smooth;
+            background-color: #0f0f1b;
+            color: #f0f0f0;
+        }
 
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
+        .glow {
+            animation: glow 1.5s infinite alternate;
+        }
 
-    ::-webkit-scrollbar-track {
-      background: #1f2937;
-    }
+        @keyframes glow {
+            0% {
+                box-shadow: 0 0 5px #0ff;
+            }
 
-    ::-webkit-scrollbar-thumb {
-      background-color: #14b8a6;
-      border-radius: 4px;
-    }
+            100% {
+                box-shadow: 0 0 20px #0ff;
+            }
+        }
 
-    ::-webkit-scrollbar-thumb:hover {
-      background-color: #0d9488;
-    }
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
 
-    * {
-      scrollbar-width: thin;
-      scrollbar-color: #14b8a6 #1f2937;
-    }
-  </style>
+        ::-webkit-scrollbar-track {
+            background: #1f2937;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background-color: #14b8a6;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background-color: #0d9488;
+        }
+
+        * {
+            scrollbar-width: thin;
+            scrollbar-color: #14b8a6 #1f2937;
+        }
+    </style>
 </head>
 
 <body>
 
-  <!-- Header -->
-  <header
-    class="fixed top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md p-4 shadow-md flex justify-between items-center rounded-b-lg">
-    <h1 class="orbit text-xl text-cyan-400 font-bold glow">Ramesh Jatav</h1>
+    <!-- Header -->
+    <header class="fixed top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md p-4 shadow-md flex justify-between items-center rounded-b-lg">
+        <h1 class="text-xl text-cyan-400 font-bold glow">Ramesh Jatav</h1>
+        <nav class="space-x-4">
+            <a href="#about" class="text-white hover:text-cyan-400">About</a>
+            <a href="#skills" class="text-white hover:text-cyan-400">Skills</a>
+            <a href="#projects" class="text-white hover:text-cyan-400">Projects</a>
+            <a href="#contact" class="text-white hover:text-cyan-400">Contact</a>
+        </nav>
+    </header>
 
-    <!-- Desktop Navigation -->
-    <nav class="hidden md:flex space-x-4">
-      <a href="#about" class="text-white hover:text-cyan-400">About</a>
-      <a href="#skills" class="text-white hover:text-cyan-400">Skills</a>
-      <a href="#projects" class="text-white hover:text-cyan-400">Projects</a>
-      <a href="#contact" class="text-white hover:text-cyan-400">Contact</a>
-    </nav>
+    <!-- Hero Section -->
+    <section class="h-screen flex flex-col items-center justify-center text-center bg-gradient-to-br from-black to-gray-900 relative overflow-hidden">
+        <div class="z-10" data-aos="fade-up">
+            <h1 class="text-4xl md:text-6xl font-extrabold text-cyan-400 glow mb-4">Hi, I'm Ramesh Jatav</h1>
+            <h2 class="text-2xl md:text-4xl text-white font-bold mb-6">Crafting Scalable Backends & Elegant APIs</h2>
+            <p class="text-gray-300 mb-8 max-w-xl mx-auto">
+                Backend Developer with experience in Node.js, MongoDB, MySQL, and API architecture.
+            </p>
+            <a href="#projects" class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition shadow-lg glow">
+                See My Work
+            </a>
+        </div>
+        <div class="absolute w-96 h-96 bg-cyan-400 opacity-10 blur-3xl animate-ping rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+    </section>
 
-    <!-- Mobile Toggle -->
-    <div class="md:hidden">
-      <button id="menu-btn" class="text-white focus:outline-none">
-        <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"
-          stroke-linecap="round" stroke-linejoin="round">
-          <path d="M4 6h16M4 12h16M4 18h16"></path>
-        </svg>
-      </button>
-    </div>
+    <!-- About Section -->
+    <section id="about" class="py-20 px-8 bg-gray-800" data-aos="fade-up">
+        <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">About Me</h3>
+        <div class="max-w-3xl mx-auto text-center text-gray-200">
+            <p>
+                I am a passionate full-stack developer with experience building responsive web applications using modern
+                technologies like Node.js, Express, MySQL, MongoDB, and RESTful APIs.
+            </p>
+        </div>
+    </section>
 
-    <!-- Mobile Navigation -->
-    <div id="mobile-menu"
-      class="hidden absolute top-full left-0 w-full bg-gray-800 p-4 flex flex-col items-center space-y-4 md:hidden">
-      <a href="#about" class="text-white hover:text-cyan-400">About</a>
-      <a href="#skills" class="text-white hover:text-cyan-400">Skills</a>
-      <a href="#projects" class="text-white hover:text-cyan-400">Projects</a>
-      <a href="#contact" class="text-white hover:text-cyan-400">Contact</a>
-    </div>
-  </header>
+    <!-- Skills Section -->
+    <section id="skills" class="py-20 px-8 bg-gray-900" data-aos="fade-up">
+        <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">Skills</h3>
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto text-center">
+            <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">Node.js</div>
+            <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">MySQL</div>
+            <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">MongoDB</div>
+            <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">REST APIs</div>
+            <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">JavaScript</div>
+            <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">Git</div>
+            <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">HTML/CSS</div>
+            <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">Tailwind CSS</div>
+        </div>
+    </section>
 
-  <!-- Hero Section -->
-  <section
-    class="h-screen flex items-center justify-center bg-gradient-to-br from-black to-gray-900 relative overflow-hidden">
-    <div class="text-center z-10">
-      <h2 class="text-5xl md:text-6xl font-bold text-cyan-300 glow orbit">Welcome to My Portfolio</h2>
-      <p class="mt-4 text-lg text-gray-300">Node.js Backend Developer | High-Quality APIs | MongoDB | MySQL</p>
-    </div>
-    <div
-      class="absolute w-80 h-80 bg-cyan-500 opacity-20 blur-3xl animate-ping rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-    </div>
-  </section>
+    <!-- Projects Section -->
+    <section id="projects" class="py-20 px-8 bg-gray-800">
+        <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">Projects</h3>
 
-  <!-- About Section -->
-  <section id="about" class="py-20 px-8 bg-gray-800">
-    <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">About Me</h3>
-    <div class="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
-      <img src="your-photo.jpg" alt="Ramesh Jatav" class="w-52 h-52 object-cover rounded-full border-4 border-cyan-500 shadow-lg">
-      <div class="text-gray-200 text-lg space-y-4">
-        <p>
-          Hello! I'm <strong class="text-cyan-300">Ramesh Jatav</strong>, a passionate backend developer from Malakhera,
-          Alwar, Rajasthan. Coming from a humble middle-class family, I completed my 10th in 2019 and 12th in 2022
-          from Government Senior Secondary School, Kerwawal.
-        </p>
-        <p>
-          In 2023, I earned an <strong>Advance Diploma in Web Development (ADWP)</strong> from DIIT Educom, Alwar, where I gained skills in
-          HTML, CSS, JavaScript, PHP, Laravel, MySQL, and more — passing with Grade A.
-        </p>
-        <p>
-          I began my professional career as a backend developer at <strong>Zulu IT Solutions (ZITS)</strong> (Aug 2023 – Nov 2024), where I spent
-          14 months building secure, scalable APIs using Node.js, MySQL, MongoDB, Sequelize, and JWT authentication. I
-          created admin dashboards, payment gateway integrations (Razorpay), and even managed hotel management systems.
-        </p>
-        <p>
-          After a brief 2-month learning break, I was hired in Feb 2025 for a project titled <strong>"Airtel Distributor"</strong> – a role-based
-          admin panel managing mobile shop transactions, SMS notifications, and financial logs, built with Node.js,
-          Sequelize ORM, and JWT-based authorization.
-        </p>
-        <p>
-          I’m currently working as a dedicated <strong class="text-cyan-300">Node.js Backend Developer</strong> with a focus on clean code,
-          performance, and real-world problem solving.
-        </p>
-      </div>
-    </div>
-  </section>
+        <!-- Personal Projects -->
+        <div class="mb-16" data-aos="fade-up">
+            <h4 class="text-2xl text-center text-white font-semibold mb-6 underline decoration-cyan-500">Personal Projects</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-gray-900 rounded-lg shadow-lg p-6 border border-cyan-600 hover:scale-105 transition">
+                    <h5 class="text-xl font-bold text-cyan-400 mb-2">Portfolio Website</h5>
+                    <p class="text-gray-300 mb-2">3D-themed portfolio using Tailwind CSS and animations.</p>
+                    <p class="text-sm text-gray-400 mb-2">Tech: HTML, Tailwind CSS, JS</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-cyan-400 underline">Live</a>
+                        <a href="#" class="text-cyan-400 underline">GitHub</a>
+                    </div>
+                </div>
 
-  <!-- Skills Section -->
-  <section id="skills" class="py-20 px-8 bg-gray-900">
-    <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">Skills</h3>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto text-center">
-      <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">Node.js</div>
-      <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">MySQL</div>
-      <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">MongoDB</div>
-      <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">REST APIs</div>
-      <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">JavaScript</div>
-      <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">Git</div>
-      <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">HTML/CSS</div>
-      <div class="p-4 bg-gray-800 rounded-lg hover:scale-105 transform transition duration-300 glow">Tailwind CSS</div>
-    </div>
-  </section>
+                <div class="bg-gray-900 rounded-lg shadow-lg p-6 border border-cyan-600 hover:scale-105 transition">
+                    <h5 class="text-xl font-bold text-cyan-400 mb-2">Task Manager API</h5>
+                    <p class="text-gray-300 mb-2">REST API to manage tasks with MongoDB & Node.js.</p>
+                    <p class="text-sm text-gray-400 mb-2">Tech: Node.js, Express, MongoDB</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-cyan-400 underline">Live</a>
+                        <a href="#" class="text-cyan-400 underline">GitHub</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-  <!-- Projects Section -->
-  <section id="projects" class="py-20 px-8 bg-gray-800">
-    <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">My Projects</h3>
+        <!-- Company Projects -->
+        <div data-aos="fade-up">
+            <h4 class="text-2xl text-center text-white font-semibold mb-6 underline decoration-cyan-500">Company Projects</h4>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+                <div class="bg-gray-900 rounded-lg shadow-lg p-6 border border-cyan-600 hover:scale-105 transition">
+                    <h5 class="text-xl font-bold text-cyan-400 mb-2">E-commerce Dashboard</h5>
+                    <p class="text-gray-300 mb-2">Admin panel to track orders, users, payments.</p>
+                    <p class="text-sm text-gray-400 mb-2">Tech: Node.js, MySQL, Tailwind CSS</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-cyan-400 underline">Live</a>
+                        <a href="#" class="text-cyan-400 underline">GitHub</a>
+                    </div>
+                </div>
 
-    <!-- Personal Projects -->
-    <h4 class="text-2xl text-cyan-300 mb-6">Personal Projects</h4>
-    <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <div class="bg-gray-900 p-6 rounded-lg shadow-md border border-cyan-600">
-        <h4 class="text-xl font-bold text-cyan-400 mb-2">Portfolio Website</h4>
-        <p class="text-gray-300 mb-2">Responsive portfolio website with Tailwind and animation effects.</p>
-        <p class="text-sm text-gray-400">Tech: HTML, Tailwind CSS, JS</p>
-      </div>
+                <!-- Add more company projects here -->
+            </div>
+        </div>
+    </section>
 
-      <div class="bg-gray-900 p-6 rounded-lg shadow-md border border-cyan-600">
-        <h4 class="text-xl font-bold text-cyan-400 mb-2">Task Manager API</h4>
-        <p class="text-gray-300 mb-2">REST API for task management using Node.js and MongoDB.</p>
-        <p class="text-sm text-gray-400">Tech: Node.js, Express, MongoDB</p>
-      </div>
+    <!-- Contact Section -->
+    <section id="contact" class="py-20 px-8 bg-gray-900" data-aos="fade-up">
+        <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">Contact Me</h3>
+        <form class="max-w-xl mx-auto bg-gray-800 p-6 rounded-lg space-y-4">
+            <input type="text" placeholder="Your Name" class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500" />
+            <input type="email" placeholder="Your Email" class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500" />
+            <textarea placeholder="Your Message" class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500"></textarea>
+            <button type="submit" class="bg-cyan-500 px-6 py-3 rounded text-white hover:bg-cyan-600 transition">Send</button>
+        </form>
+    </section>
 
-      <div class="bg-gray-900 p-6 rounded-lg shadow-md border border-cyan-600">
-        <h4 class="text-xl font-bold text-cyan-400 mb-2">E-commerce Backend</h4>
-        <p class="text-gray-300 mb-2">Secure backend for orders, payments, and admin control.</p>
-        <p class="text-sm text-gray-400">Tech: Node.js, Sequelize, Razorpay</p>
-      </div>
-    </div>
-  </section>
+    <!-- Footer -->
+    <footer class="bg-black text-center text-gray-500 p-4">
+        © 2025 Ramesh Jatav. All rights reserved.
+    </footer>
 
-  <!-- Contact Section -->
-  <section id="contact" class="py-20 px-8 bg-gray-800">
-    <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">Contact Me</h3>
-    <form class="max-w-xl mx-auto bg-gray-900 p-6 rounded-lg space-y-4">
-      <input type="text" placeholder="Your Name"
-        class="w-full p-3 bg-gray-800 text-white rounded border border-cyan-500" />
-      <input type="email" placeholder="Your Email"
-        class="w-full p-3 bg-gray-800 text-white rounded border border-cyan-500" />
-      <textarea placeholder="Your Message"
-        class="w-full p-3 bg-gray-800 text-white rounded border border-cyan-500"></textarea>
-      <button type="submit"
-        class="bg-cyan-500 px-6 py-3 rounded text-white hover:bg-cyan-600 transition">Send</button>
-    </form>
-  </section>
-
-  <!-- Footer -->
-  <footer class="bg-black text-center text-gray-500 p-4">
-    © 2025 Ramesh Jatav. All rights reserved.
-  </footer>
-
-  <!-- JS for Mobile Menu -->
-  <script>
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => {
-      mobileMenu.classList.toggle('hidden');
-    });
-  </script>
-
+    <!-- AOS JS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1200 });
+    </script>
 </body>
 
 </html>
