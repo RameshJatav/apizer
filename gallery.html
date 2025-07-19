@@ -19,8 +19,6 @@
       0% { box-shadow: 0 0 5px #0ff; }
       100% { box-shadow: 0 0 20px #0ff; }
     }
-
-    /* Fade slide-up animation */
     .fade-slide-up {
       opacity: 0;
       transform: translateY(30px);
@@ -30,6 +28,14 @@
       opacity: 1;
       transform: translateY(0);
     }
+    /* Custom scrollbar for thumbnails */
+    #thumbnailList::-webkit-scrollbar {
+      width: 6px;
+    }
+    #thumbnailList::-webkit-scrollbar-thumb {
+      background-color: #ef4444; /* red-500 */
+      border-radius: 4px;
+    }
   </style>
 </head>
 <body class="scroll-smooth">
@@ -37,11 +43,18 @@
   <!-- Header -->
   <header class="fixed top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md p-4 flex justify-between items-center rounded-b-lg">
     <h1 class="text-xl text-cyan-400 font-bold glow">Ramesh Jatav</h1>
-    <nav class="space-x-4">
-      <a href="portfolio.html#about" class="text-white hover:text-cyan-400">About</a>
-      <a href="portfolio.html#projects" class="text-white hover:text-cyan-400">Projects</a>
-      <a href="gallery.html" class="text-white hover:text-cyan-400">Gallery</a>
-      <a href="portfolio.html#contact" class="text-white hover:text-cyan-400">Contact</a>
+    <nav class="space-x-4 text-white">
+      <!-- Desktop Navigation -->
+      <div class="hidden md:flex space-x-4">
+        <a href="index.html#about" class="hover:text-cyan-400">About</a>
+        <a href="index.html#projects" class="hover:text-cyan-400">Projects</a>
+        <a href="gallery.html" class="hover:text-cyan-400">Gallery</a>
+        <a href="index.html#contact" class="hover:text-cyan-400">Contact</a>
+      </div>
+      <!-- Mobile: only Home -->
+      <div class="md:hidden">
+        <a href="index.html" class="hover:text-cyan-400">Home</a>
+      </div>
     </nav>
   </header>
 
@@ -55,15 +68,20 @@
     </section>
 
     <section id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <!-- Photos will be inserted here dynamically -->
+      <!-- Photos will be dynamically inserted here -->
     </section>
   </main>
 
-  <!-- Modal (Popup) -->
+  <!-- Modal -->
   <div id="photoModal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden">
     <div class="relative flex w-full max-w-6xl bg-gray-900 rounded-lg overflow-hidden">
 
-      <!-- Main Image Display -->
+      <!-- Close Button (Top-Right) -->
+      <button onclick="closeModal()" aria-label="Close gallery" class="absolute top-2 right-2 text-white text-3xl bg-red-600 hover:bg-red-700 p-2 rounded-full z-50">
+        ✕
+      </button>
+
+      <!-- Main Image -->
       <div class="flex-1 flex flex-col items-center justify-center p-4">
         <img id="mainImage" src="" alt="Selected" class="max-h-[80vh] rounded mb-4 transition duration-300" />
         <div class="flex justify-between w-full">
@@ -72,19 +90,9 @@
         </div>
       </div>
 
-      <!-- Thumbnails List -->
-      <div id="thumbnailList" class="w-32 bg-gray-800 overflow-y-auto p-2 space-y-2">
-        <!-- Thumbnails dynamically inserted here -->
-      </div>
-
-      <!-- Close Buttons -->
-      <button onclick="closeModal()" aria-label="Close gallery" class="absolute top-2 right-2 text-white text-2xl bg-gray-700 p-2 rounded z-50 hover:bg-red-600">
-        ✕
-      </button>
-      <div class="absolute bottom-4 right-4">
-        <button onclick="closeModal()" class="bg-red-600 text-white px-4 py-2 rounded hover:bg-red-700 transition">
-          Close
-        </button>
+      <!-- Thumbnail Scrollbar -->
+      <div id="thumbnailList" class="w-32 max-h-[90vh] overflow-y-auto bg-gray-800 p-2 space-y-2">
+        <!-- Thumbnails will be added here -->
       </div>
     </div>
   </div>
@@ -94,7 +102,7 @@
     © 2025 Ramesh Jatav. All rights reserved.
   </footer>
 
-  <!-- JavaScript Logic -->
+  <!-- JavaScript -->
   <script>
     const totalPhotos = 13;
     const initialLoadCount = 10;
@@ -102,27 +110,27 @@
 
     const gallery = document.getElementById('gallery');
     const thumbnailList = document.getElementById('thumbnailList');
-    const photoModal = document.getElementById('photoModal');
     const mainImage = document.getElementById('mainImage');
+    const photoModal = document.getElementById('photoModal');
 
-    // Function to create a photo div element
-    function createPhotoElement(i) {
-      const photoDiv = document.createElement('div');
-      photoDiv.className = 'bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer fade-slide-up';
-      photoDiv.onclick = () => openModal(i);
+    // Create photo block
+    function createPhoto(i) {
+      const div = document.createElement('div');
+      div.className = 'bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer fade-slide-up';
+      div.onclick = () => openModal(i);
 
       const img = document.createElement('img');
       img.src = `gallery/ph${i + 1}.jpg`;
       img.alt = `Photo ${i + 1}`;
-      img.loading = 'lazy';
       img.className = 'w-full h-64 object-cover';
+      img.loading = 'lazy';
 
-      photoDiv.appendChild(img);
-      return photoDiv;
+      div.appendChild(img);
+      return div;
     }
 
-    // Function to create thumbnail img element
-    function createThumbnail(i) {
+    // Create thumbnail
+    function createThumb(i) {
       const thumb = document.createElement('img');
       thumb.src = `gallery/ph${i + 1}.jpg`;
       thumb.id = `thumb${i}`;
@@ -131,73 +139,64 @@
       return thumb;
     }
 
-    // Load initial photos (first 10)
+    // Load first 10 images
     function loadInitialPhotos() {
-      for(let i = 0; i < initialLoadCount; i++) {
-        gallery.appendChild(createPhotoElement(i));
-        thumbnailList.appendChild(createThumbnail(i));
+      for (let i = 0; i < initialLoadCount; i++) {
+        gallery.appendChild(createPhoto(i));
+        thumbnailList.appendChild(createThumb(i));
       }
     }
 
-    // Load remaining photos after 5 seconds
-    function loadRemainingPhotos() {
-      for(let i = initialLoadCount; i < totalPhotos; i++) {
-        gallery.appendChild(createPhotoElement(i));
-        thumbnailList.appendChild(createThumbnail(i));
+    // Load remaining after 5s
+    function loadMorePhotos() {
+      for (let i = initialLoadCount; i < totalPhotos; i++) {
+        gallery.appendChild(createPhoto(i));
+        thumbnailList.appendChild(createThumb(i));
       }
-      setupScrollAnimation(); // re-initialize observer for new photos
+      setupScrollAnimations(); // new photos need observer
     }
 
-    // Modal open
-    function openModal(index) {
-      currentIndex = index;
-      updateMainImage();
+    function openModal(i) {
+      currentIndex = i;
+      updateModalImage();
       photoModal.classList.remove('hidden');
     }
 
-    // Modal close
     function closeModal() {
       photoModal.classList.add('hidden');
     }
 
-    // Next photo
     function nextPhoto() {
       currentIndex = (currentIndex + 1) % totalPhotos;
-      updateMainImage();
+      updateModalImage();
     }
 
-    // Previous photo
     function prevPhoto() {
       currentIndex = (currentIndex - 1 + totalPhotos) % totalPhotos;
-      updateMainImage();
+      updateModalImage();
     }
 
-    // Select photo via thumbnail
-    function selectPhoto(index) {
-      currentIndex = index;
-      updateMainImage();
+    function selectPhoto(i) {
+      currentIndex = i;
+      updateModalImage();
     }
 
-    // Update modal main image and highlight thumbnail
-    function updateMainImage() {
+    function updateModalImage() {
       mainImage.src = `gallery/ph${currentIndex + 1}.jpg`;
-
-      // Remove highlight from all thumbnails
-      for(let i = 0; i < totalPhotos; i++) {
+      for (let i = 0; i < totalPhotos; i++) {
         const thumb = document.getElementById(`thumb${i}`);
         if (thumb) thumb.classList.remove('ring-2', 'ring-cyan-400');
       }
-      // Highlight current thumbnail
       const activeThumb = document.getElementById(`thumb${currentIndex}`);
       if (activeThumb) activeThumb.classList.add('ring-2', 'ring-cyan-400');
     }
 
-    // Intersection Observer for scroll animations
-    function setupScrollAnimation() {
+    // Fade animation on scroll
+    function setupScrollAnimations() {
       const items = document.querySelectorAll('.fade-slide-up:not(.visible)');
-      const observer = new IntersectionObserver((entries, observer) => {
+      const observer = new IntersectionObserver(entries => {
         entries.forEach(entry => {
-          if(entry.isIntersecting) {
+          if (entry.isIntersecting) {
             entry.target.classList.add('visible');
             observer.unobserve(entry.target);
           }
@@ -207,18 +206,12 @@
       items.forEach(item => observer.observe(item));
     }
 
-    // Initialize gallery
+    // On page load
     document.addEventListener('DOMContentLoaded', () => {
       loadInitialPhotos();
-      setupScrollAnimation();
-
-      // Load remaining photos after 5 seconds delay
-      setTimeout(() => {
-        loadRemainingPhotos();
-      }, 5000);
+      setupScrollAnimations();
+      setTimeout(() => loadMorePhotos(), 5000);
     });
   </script>
-
-  
 </body>
 </html>
