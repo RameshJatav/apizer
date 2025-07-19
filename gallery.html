@@ -74,7 +74,7 @@
       width: 6px;
     }
     #thumbnailList::-webkit-scrollbar-thumb {
-      background-color: #ef4444; /* red-500 */
+      background-color: #11413e; /* red-500 */
       border-radius: 4px;
     }
   </style>
@@ -118,7 +118,7 @@
     <div class="relative flex w-full max-w-6xl bg-gray-900 rounded-lg overflow-hidden">
 
       <!-- Close Button (Top-Right) -->
-      <button onclick="closeModal()" aria-label="Close gallery" class="absolute top-2 right-2 text-white text-3xl bg-red-600 hover:bg-red-700 p-2 rounded-full z-50">
+      <button onclick="closeModal()" aria-label="Close gallery" class="absolute top-2 right-40 text-white text-3xl bg-red-600 hover:bg-red-700 p-2 rounded-lg z-50">
         ✕
       </button>
 
@@ -126,8 +126,8 @@
       <div class="flex-1 flex flex-col items-center justify-center p-4">
         <img id="mainImage" src="" alt="Selected" class="max-h-[80vh] rounded mb-4 transition duration-300" />
         <div class="flex justify-between w-full">
-          <button onclick="prevPhoto()" class="text-white text-xl px-4 py-2 hover:text-cyan-400">⟨ Prev</button>
-          <button onclick="nextPhoto()" class="text-white text-xl px-4 py-2 hover:text-cyan-400">Next ⟩</button>
+          <button onclick="prevPhoto()" class="text-white text-xl px-4 py-2 hover:text-cyan-400"> ⟨ </button>
+          <button onclick="nextPhoto()" class="text-white text-xl px-4 py-2 hover:text-cyan-400"> ⟩ </button>
         </div>
       </div>
 
@@ -139,9 +139,38 @@
   </div>
 
   <!-- Footer -->
-  <footer class="bg-black text-center text-gray-500 p-6">
-    © 2025 Ramesh Jatav. All rights reserved.
-  </footer>
+<footer class="bg-black text-center text-gray-500 p-6">
+  <div class="flex flex-col items-center space-y-3">
+    <p>© 2025 Ramesh Jatav. All rights reserved.</p>
+
+    <!-- Social Icons -->
+    <div class="flex space-x-6 text-white text-2xl">
+      <!-- Instagram -->
+      <a href="https://www.instagram.com/amit02_j/" target="_blank" aria-label="Instagram" class="hover:text-pink-400 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
+        </svg>
+      </a>
+
+      <!-- GitHub -->
+      <a href="http://github.com/rameshjatav" target="_blank" aria-label="GitHub" class="hover:text-gray-300 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.66-.22.66-.48v-1.7c-2.78.61-3.37-1.4-3.37-1.4-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.8-4.57 5.05.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.02 10.02 0 0022 12.26C22 6.58 17.52 2 12 2z"/>
+        </svg>
+      </a>
+
+      <!-- LinkedIn -->
+      <a href="https://in.linkedin.com/in/ramesh-jatav-150328266" target="_blank" aria-label="LinkedIn" class="hover:text-blue-400 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M19 0h-14C2.69 0 1 .69 1 2v20c0 1.31.69 2 2 2h14c1.31 0 2-.69 2-2V2c0-1.31-.69-2-2-2zM8.5 18h-3v-9h3v9zm-1.5-10.28c-.97 0-1.75-.79-1.75-1.76S6.03 4.2 7 4.2s1.75.78 1.75 1.76-.78 1.76-1.75 1.76zM19 18h-3v-4.5c0-1.08-.37-1.82-1.29-1.82-.71 0-1.13.48-1.31.94-.07.17-.09.41-.09.65V18h-3v-9h3v1.23c.39-.61 1.09-1.48 2.66-1.48 1.94 0 3.32 1.27 3.32 3.99V18z"/>
+        </svg>
+      </a>
+    </div>
+
+    <!-- Gallery Link -->
+    <a href="gallery.html" class="text-white hover:text-cyan-400 mt-3 block">Gallery</a>
+  </div>
+</footer>
 
   <!-- JavaScript -->
   <script>
