@@ -207,7 +207,8 @@
 
       let history = JSON.parse(localStorage.getItem('requestHistory') || '[]');
       const now = Date.now();
-      const oneHover = (1 * 60 * 60 * 1000)+(1 * 60 * 1000);
+      const oneHover = 1 * 60 * 60 * 1000;
+      // const threedays = 3 * 24 * 60 * 60 * 1000;
 
       history = history.filter(entry => {
         if (now - entry.timestamp > oneHover) {
