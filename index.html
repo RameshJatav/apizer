@@ -17,6 +17,7 @@
   <meta property="og:image" content="https://portfolio-web-six-mu.vercel.app/mylogo.png" />
   <meta property="og:url" content="https://apizer.vercel.app/about" />
   <meta name="twitter:card" content="summary_large_image">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 
   <link rel="icon" href="./mylogo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
@@ -85,6 +86,7 @@
       max-width: 600px;
     }
   </style>
+  
 </head>
 
 <body class="bg-black min-h-screen text-white">
@@ -111,8 +113,10 @@
       <!-- Header (Fixed inside the popup) -->
       <div
         class="absolute top-0 left-0 w-full z-10 flex justify-between items-center bg-teal-600/50 backdrop-blur-lg backdrop-saturate-150 px-4 py-2 shadow-md">
-        <h2 class="text-xl font-bold">Request History</h2>
-        <p class="font-bold text-red-300">⚠ History will be deleted after 3 days.</p>
+        <h2 class="text-xl font-bold">
+          <i class="fas fa-history"></i> Request History
+        </h2>
+        <p class="font-bold text-yellow-500">⚠ History will be deleted after 3 days.</p>
         <button onclick="closeHistory()" class="text-red-400 hover:text-red-600 text-lg">✖</button>
       </div>
 
@@ -156,8 +160,9 @@
       <input id="url" type="url" placeholder="https://api.example.com/data"
         class="bg-black w-full p-2 border rounded text-white" required />
 
-        <div class="flex items-center gap-2 mt-1">
-        <button id="send-btn" onclick="sendRequest()" class="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 flex items-center ">
+      <div class="flex items-center gap-2 mt-1">
+        <button id="send-btn" onclick="sendRequest()"
+          class="bg-teal-600 text-white px-4 py-2 rounded hover:bg-teal-700 flex items-center ">
           Send
         </button>
         <div id="loading-spinner" class="spinner hidden"></div>
@@ -178,7 +183,7 @@
         <div id="fields-container" class="space-y-2 mt-2"></div>
       </div>
 
-      
+
     </div>
 
     <!-- Right Panel -->
@@ -354,7 +359,7 @@
       if (event.ctrlKey && event.key === 'Enter') {
         const sendBtn = document.getElementById('send-btn');
         if (!sendBtn.disabled) {
-          sendBtn.click(); 
+          sendBtn.click();
         }
       }
     });
@@ -412,7 +417,7 @@
 
 
 
-    
+
   </script>
 
   <script type="application/ld+json">
