@@ -86,34 +86,7 @@
       max-width: 600px;
     }
 
-    .graph-line-container {
-      width: 100%;
-      height: 50px;
-      overflow: hidden;
-      background-color: black;
-      /* Optional background */
-    }
-
-    .graph-line {
-      width: 200%;
-      height: 100%;
-      background: repeating-linear-gradient(135deg,
-          lime 0px,
-          lime 4px,
-          transparent 4px,
-          transparent 8px);
-      animation: moveGraph 2s linear infinite;
-    }
-
-    @keyframes moveGraph {
-      0% {
-        transform: translateX(0%);
-      }
-
-      100% {
-        transform: translateX(-50%);
-      }
-    }
+    
   </style>
 
 </head>
@@ -121,8 +94,7 @@
 <body class="bg-black min-h-screen text-white">
 
   <!-- Navbar -->
-  <nav
-    class="fixed  top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md backdrop-saturate-150 p-4 shadow-md flex justify-between items-center rounded-b-lg ">
+  <nav class="fixed  top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md backdrop-saturate-150 p-4 shadow-md flex justify-between items-center rounded-b-lg ">
     <!-- <h1 class="text-xl font-bold text-teal-500">REST API Tool</h1> -->
     <a href="https://portfolio-web-six-mu.vercel.app"><img src="./mylogo.png" alt="Ramesh jatav"
         class="h-10 w-10  bg-transparent object-contain" /></a>
@@ -221,20 +193,8 @@
       <div id="response-status" class="mt-2 font-mono text-sm text-gray-300"></div>
       <div id="time-display" class="text-xs text-gray-400 mb-2"></div>
 
-      <hr class="relative border-0 h-1 bg-transparent overflow-hidden my-4">
-      <div class="graph-line-container">
-        <div class="graph-line"></div>
-      </div>
-      <!--  <div class="relative h-1 w-full overflow-hidden">
-        <div class="absolute top-0 left-0 h-full w-full bg-teal-500 opacity-20"></div>
-        <div class="absolute top-0 left-[-50%] h-full w-full bg-gradient-to-r from-transparent via-teal-400 to-transparent animate-electric">
-        </div>
-      </div> -->
-
-
-
-      <pre id="response-body"
-        class="mt-2 p-4 rounded text-sm overflow-auto max-h-[70vh] text-white whitespace-pre-wrap"></pre>
+      <hr class="border border-teal-300 shadow-md shadow-white ">
+      <pre id="response-body"class="mt-2 p-4 rounded text-sm overflow-auto max-h-[70vh] text-white whitespace-pre-wrap"></pre>
 
     </div>
   </div>
