@@ -332,32 +332,6 @@
       }
 
       const start = performance.now();
-      // try {
-      //   const res = await fetch(url, options);
-      //   const time = (performance.now() - start).toFixed(2);
-      //   const contentType = res.headers.get('content-type');
-      //   let responseBody;
-      //   if (contentType?.includes('application/json')) {
-      //     responseBody = JSON.stringify(await res.json(), null, 2);
-      //   } else {
-      //     responseBody = await res.text();
-      //   }
-
-      //   document.getElementById('response-status').textContent =
-      //     `Status: ${res.status} (${res.statusText}) | Time: ${time} ms`;
-      //   document.getElementById('time-display').textContent = `⏱ ${(time / 1000).toFixed(2)} s | ${new Date().toLocaleTimeString()}`;
-      //   document.getElementById('response-body').textContent = responseBody;
-
-      //   saveHistory({ method, url, time: new Date().toLocaleTimeString(), timestamp: Date.now() });
-
-      // } catch (err) {
-      //   document.getElementById('response-status').textContent = 'Error';
-      //   document.getElementById('response-body').textContent = err.toString();
-      // } finally {
-      //   spinner.classList.add('hidden');
-      //   sendBtn.disabled = false;
-      // }
-
       try {
         const res = await fetch(url, options);
         const time = (performance.now() - start).toFixed(2);
