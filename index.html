@@ -85,6 +85,20 @@
       width: 90%;
       max-width: 600px;
     }
+
+    @keyframes electric {
+      0% {
+        left: -50%;
+      }
+
+      100% {
+        left: 100%;
+      }
+    }
+
+    .animate-electric {
+      animation: electric 1.2s linear infinite;
+    }
   </style>
 
 </head>
@@ -191,8 +205,15 @@
       <h2 class="text-xl font-semibold text-yellow-400">Response</h2>
       <div id="response-status" class="mt-2 font-mono text-sm text-gray-300"></div>
       <div id="time-display" class="text-xs text-gray-400 mb-2"></div>
-      <hr class=" border border-yellow-700">
-      <hr class="border border-green-700 mt-1 ">
+
+      <hr class="relative border-0 h-1 bg-transparent overflow-hidden my-4">
+      <div class="relative h-1 w-full overflow-hidden">
+        <div class="absolute top-0 left-0 h-full w-full bg-teal-500 opacity-20"></div>
+        <div class="absolute top-0 left-[-50%] h-full w-full bg-gradient-to-r from-transparent via-teal-400 to-transparent animate-electric">
+        </div>
+      </div>
+
+
 
       <pre id="response-body"
         class="mt-2 p-4 rounded text-sm overflow-auto max-h-[70vh] text-white whitespace-pre-wrap"></pre>
@@ -210,7 +231,7 @@
       let history = JSON.parse(localStorage.getItem('requestHistory') || '[]');
       const now = Date.now();
       const threedays = 3 * 24 * 60 * 60 * 1000;
-      
+
       history = history.filter(entry => {
         if (now - entry.timestamp > threedays) {
           alert('Some entries older than 3 days were deleted.');
