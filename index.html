@@ -86,18 +86,33 @@
       max-width: 600px;
     }
 
-    @keyframes electric {
+    .graph-line-container {
+      width: 100%;
+      height: 50px;
+      overflow: hidden;
+      background-color: black;
+      /* Optional background */
+    }
+
+    .graph-line {
+      width: 200%;
+      height: 100%;
+      background: repeating-linear-gradient(135deg,
+          lime 0px,
+          lime 4px,
+          transparent 4px,
+          transparent 8px);
+      animation: moveGraph 2s linear infinite;
+    }
+
+    @keyframes moveGraph {
       0% {
-        left: -50%;
+        transform: translateX(0%);
       }
 
       100% {
-        left: 100%;
+        transform: translateX(-50%);
       }
-    }
-
-    .animate-electric {
-      animation: electric 1.2s linear infinite;
     }
   </style>
 
@@ -207,11 +222,14 @@
       <div id="time-display" class="text-xs text-gray-400 mb-2"></div>
 
       <hr class="relative border-0 h-1 bg-transparent overflow-hidden my-4">
-      <div class="relative h-1 w-full overflow-hidden">
+      <div class="graph-line-container">
+        <div class="graph-line"></div>
+      </div>
+      <!--  <div class="relative h-1 w-full overflow-hidden">
         <div class="absolute top-0 left-0 h-full w-full bg-teal-500 opacity-20"></div>
         <div class="absolute top-0 left-[-50%] h-full w-full bg-gradient-to-r from-transparent via-teal-400 to-transparent animate-electric">
         </div>
-      </div>
+      </div> -->
 
 
 
