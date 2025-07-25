@@ -18,10 +18,23 @@
   <meta property="og:url" content="https://apizer.vercel.app/about" />
   <meta name="twitter:card" content="summary_large_image">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
-
+   <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap" rel="stylesheet">
+ 
   <link rel="icon" href="./mylogo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <style>
+
+      @keyframes fade-in {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+      .animate-fade-in {
+        animation: fade-in 1s ease-out forwards;
+      }
+
+
+
+
     #response-body::-webkit-scrollbar {
       width: 8px;
     }
@@ -98,7 +111,9 @@
     <!-- <h1 class="text-xl font-bold text-teal-500">REST API Tool</h1> -->
     <a href="https://portfolio-web-six-mu.vercel.app"><img src="./mylogo.png" alt="Ramesh Jatav"
         class="h-10 w-10  bg-transparent object-contain" /></a>
-
+        <p class="absolute left-1/2 transform -translate-x-1/2 text-white text-3xl sm:text-4xl font-light italic animate-fade-in tracking-wide font-[cursive]">
+          hello developers
+        </p>
     <ul class="flex gap-6 text-white">
       <li><a href="#" class="hover:text-teal-400 transition">API Testing</a></li>
       <li><a href="./about.html" class="hover:text-teal-400 transition">About Us</a></li>
