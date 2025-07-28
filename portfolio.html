@@ -1,18 +1,17 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Ramesh Jatav</title>
- <link rel="icon" href="./mylogo.png" />
-   <script src="https://cdn.tailwindcss.com"></script>
-   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
+  <link rel="icon" href="./mylogo.png" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet">
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet" />
 
   <style>
-
-
-     #response-body::-webkit-scrollbar {
+    #response-body::-webkit-scrollbar {
       width: 8px;
     }
 
@@ -66,27 +65,44 @@
     }
 
     @keyframes glow {
-      0% { box-shadow: 0 0 5px #0ff; }
-      100% { box-shadow: 0 0 20px #0ff; }
+      0% {
+        box-shadow: 0 0 5px #0ff;
+      }
+
+      100% {
+        box-shadow: 0 0 20px #0ff;
+      }
     }
 
-    ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #1f2937; }
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+
+    ::-webkit-scrollbar-track {
+      background: #1f2937;
+    }
+
     ::-webkit-scrollbar-thumb {
       background-color: #14b8a6;
       border-radius: 4px;
     }
-    ::-webkit-scrollbar-thumb:hover { background-color: #0d9488; }
+
+    ::-webkit-scrollbar-thumb:hover {
+      background-color: #0d9488;
+    }
+
     * {
       scrollbar-width: thin;
       scrollbar-color: #14b8a6 #1f2937;
     }
   </style>
 </head>
+
 <body>
 
   <!-- Header -->
-  <header class="fixed top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md p-4 shadow-md flex justify-between items-center rounded-b-lg">
+  <header
+    class="fixed top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md p-4 shadow-md flex justify-between items-center rounded-b-lg">
     <h1 class="text-xl text-cyan-400 font-bold glow">Ramesh Jatav</h1>
     <nav class="space-x-4 hidden md:flex">
       <a href="#about" class="text-white hover:text-cyan-400">About</a>
@@ -99,16 +115,21 @@
   </header>
 
   <!-- Hero Section -->
-  <section class="h-screen flex flex-col items-center justify-center text-center bg-gradient-to-br from-black to-gray-900 relative overflow-hidden">
+  <section
+    class="h-screen flex flex-col items-center justify-center text-center bg-gradient-to-br from-black to-gray-900 relative overflow-hidden">
     <div class="z-10" data-aos="fade-up">
       <h1 class="text-4xl md:text-6xl font-extrabold text-cyan-400 glow mb-4">Hi, I'm Ramesh Jatav</h1>
       <h2 class="text-2xl md:text-4xl text-white font-bold mb-6">Crafting Scalable Backends & Elegant APIs</h2>
-      <p class="text-gray-300 mb-8 max-w-xl mx-auto">Backend Developer with experience in Node.js, MongoDB, MySQL, and API architecture.</p>
-      <a href="#projects" class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition shadow-lg glow">
+      <p class="text-gray-300 mb-8 max-w-xl mx-auto">Backend Developer with experience in Node.js, MongoDB, MySQL, and
+        API architecture.</p>
+      <a href="#projects"
+        class="bg-cyan-500 hover:bg-cyan-600 text-white px-6 py-3 rounded-full text-lg font-semibold transition shadow-lg glow">
         See My Work
       </a>
     </div>
-    <div class="absolute w-96 h-96 bg-cyan-400 opacity-10 blur-3xl animate-ping rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+    <div
+      class="absolute w-96 h-96 bg-cyan-400 opacity-10 blur-3xl animate-ping rounded-full top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
+    </div>
   </section>
 
   <!-- Updated About Section -->
@@ -116,14 +137,24 @@
     <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">About Me</h3>
     <div class="max-w-5xl mx-auto flex flex-col lg:flex-row items-center gap-10">
       <div class="flex-shrink-0">
-        <img src="./gallery/ph2.jpg" alt="Ramesh Jatav" class="w-48 h-48 object-cover rounded-full border-4 border-cyan-400 shadow-lg">
+        <img src="./gallery/ph2.jpg" alt="Ramesh Jatav"
+          class="w-48 h-48 object-cover rounded-full border-4 border-cyan-400 shadow-lg">
       </div>
       <div class="text-gray-200 text-lg space-y-4">
-        <p>Hello! I'm <span class="text-cyan-400 font-semibold">Ramesh Jatav</span> from Malakhera, Alwar (Rajasthan), belonging to a middle‑class family.</p>
-        <p>I completed my 10th in 2020 and 12th in 2022 from Government Senior Secondary School, Kerwawal, Alwar. In 2023, I earned an <strong>Advance Diploma in Web Development Professional (Grade A)</strong> from DIIT Educom, Alwar, where I built strong foundations in MySQL, JavaScript, PHP, Laravel, and backend architecture.</p>
-        <p>From August 2023 to November 2024, I worked at <strong>Zulu IT Solutions (ZITS)</strong> as a Backend Developer. Over 14 months, I built high‑quality RESTful APIs using Node.js, MySQL, MongoDB, and JWT authentication. I developed e‑commerce platforms with Razorpay payments, secure admin dashboards, and a hotel management system for Rambihari Palace.</p>
-        <p>After a short learning break focused on Sequelize ORM, advanced MySQL, and Socket.io, I joined the “Airtel Distributor” project from February to July 2025. I built a secure admin panel handling transactions, SMS notifications, balance tracking, and role‑based access with JWT.</p>
-        <p>I’m currently working as a dedicated <strong>Node.js Backend Developer</strong>, committed to writing clean, efficient, and secure server‑side code.</p>
+        <p>Hello! I'm <span class="text-cyan-400 font-semibold">Ramesh Jatav</span> from Malakhera, Alwar (Rajasthan),
+          belonging to a middle‑class family.</p>
+        <p>I completed my 10th in 2020 and 12th in 2022 from Government Senior Secondary School, Kerwawal, Alwar. In
+          2023, I earned an <strong>Advance Diploma in Web Development Professional (Grade A)</strong> from DIIT Educom,
+          Alwar, where I built strong foundations in MySQL, JavaScript, PHP, Laravel, and backend architecture.</p>
+        <p>From August 2023 to November 2024, I worked at <strong>Zulu IT Solutions (ZITS)</strong> as a Backend
+          Developer. Over 14 months, I built high‑quality RESTful APIs using Node.js, MySQL, MongoDB, and JWT
+          authentication. I developed e‑commerce platforms with Razorpay payments, secure admin dashboards, and a hotel
+          management system for Rambihari Palace.</p>
+        <p>After a short learning break focused on Sequelize ORM, advanced MySQL, and Socket.io, I joined the “Airtel
+          Distributor” project from February to July 2025. I built a secure admin panel handling transactions, SMS
+          notifications, balance tracking, and role‑based access with JWT.</p>
+        <p>I’m currently working as a dedicated <strong>Node.js Backend Developer</strong>, committed to writing clean,
+          efficient, and secure server‑side code.</p>
       </div>
     </div>
   </section>
@@ -143,134 +174,202 @@
     </div>
   </section>
 
-     <!-- Projects Section -->
-    <section id="projects" class="py-20 px-8 bg-gray-800">
-        <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">Projects</h3>
+  <!-- Projects Section -->
+  <section id="projects" class="py-20 px-8 bg-gray-800">
+    <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">Projects</h3>
 
-        <!-- Personal Projects -->
-        <div class="mb-16" data-aos="fade-up">
-            <h4 class="text-2xl text-center text-white font-semibold mb-6 underline decoration-cyan-500">Personal Projects</h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <div class="bg-gray-900 rounded-lg shadow-lg p-6 border border-cyan-600 hover:scale-105 transition">
-                    <h5 class="text-xl font-bold text-cyan-400 mb-2">Portfolio Website</h5>
-                    <p class="text-gray-300 mb-2">3D-themed portfolio using Tailwind CSS and animations.</p>
-                    <p class="text-sm text-gray-400 mb-2">Tech: HTML, Tailwind CSS, JS</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-cyan-400 underline">Live</a>
-                        <a href="#" class="text-cyan-400 underline">GitHub</a>
-                    </div>
-                </div>
-
-                <div class="bg-gray-900 rounded-lg shadow-lg p-6 border border-cyan-600 hover:scale-105 transition">
-                    <h5 class="text-xl font-bold text-cyan-400 mb-2">Task Manager API</h5>
-                    <p class="text-gray-300 mb-2">REST API to manage tasks with MongoDB & Node.js.</p>
-                    <p class="text-sm text-gray-400 mb-2">Tech: Node.js, Express, MongoDB</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-cyan-400 underline">Live</a>
-                        <a href="#" class="text-cyan-400 underline">GitHub</a>
-                    </div>
-                </div>
-            </div>
+    <!-- Personal Projects -->
+    <div class="mb-16" data-aos="fade-up">
+      <h4 class="text-2xl text-center text-white font-semibold mb-6 underline decoration-cyan-500">Personal Projects
+      </h4>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="bg-gray-900 rounded-lg shadow-lg p-6 border border-cyan-600 hover:scale-105 transition">
+          <h5 class="text-xl font-bold text-cyan-400 mb-2">Portfolio Website</h5>
+          <p class="text-gray-300 mb-2">3D-themed portfolio using Tailwind CSS and animations.</p>
+          <p class="text-sm text-gray-400 mb-2">Tech: HTML, Tailwind CSS, JS</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-cyan-400 underline">Live</a>
+            <a href="#" class="text-cyan-400 underline">GitHub</a>
+          </div>
         </div>
 
-        <!-- Company Projects -->
-        <div data-aos="fade-up">
-            <h4 class="text-2xl text-center text-white font-semibold mb-6 underline decoration-cyan-500">Company Projects</h4>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-                <div class="bg-gray-900 rounded-lg shadow-lg p-6 border border-cyan-600 hover:scale-105 transition">
-                    <h5 class="text-xl font-bold text-cyan-400 mb-2">E-commerce Dashboard</h5>
-                    <p class="text-gray-300 mb-2">Admin panel to track orders, users, payments.</p>
-                    <p class="text-sm text-gray-400 mb-2">Tech: Node.js, MySQL, Tailwind CSS</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-cyan-400 underline">Live</a>
-                        <a href="#" class="text-cyan-400 underline">GitHub</a>
-                    </div>
-                </div>
-
-                <!-- Add more company projects here -->
-            </div>
+        <div class="bg-gray-900 rounded-lg shadow-lg p-6 border border-cyan-600 hover:scale-105 transition">
+          <h5 class="text-xl font-bold text-cyan-400 mb-2">Task Manager API</h5>
+          <p class="text-gray-300 mb-2">REST API to manage tasks with MongoDB & Node.js.</p>
+          <p class="text-sm text-gray-400 mb-2">Tech: Node.js, Express, MongoDB</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-cyan-400 underline">Live</a>
+            <a href="#" class="text-cyan-400 underline">GitHub</a>
+          </div>
         </div>
-    </section>
-
-    <!-- Contact Section -->
-    <section id="contact" class="py-20 px-8 bg-gray-900" data-aos="fade-up">
-        <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">Contact Me</h3>
-        <form class="max-w-xl mx-auto bg-gray-800 p-6 rounded-lg space-y-4">
-            <input type="text" id="name" placeholder="Your Name"required class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500" />
-            <input type="email" id="email" placeholder="Your Email"required class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500" />
-            <textarea id="message" placeholder="Your Message" required class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500"></textarea>
-            <button type="submit" class="bg-cyan-500 px-6 py-3 rounded text-white hover:bg-cyan-600 transition">Send</button>
-        </form>
-    </section>
-
-    <!-- Footer -->
-  <footer class="bg-black text-center text-gray-500 p-6">
-  <div class="flex flex-col items-center space-y-3">
-    <p>© 2025 Ramesh Jatav. All rights reserved.</p>
-
-    <!-- Social Icons -->
-    <div class="flex space-x-6 text-white text-2xl">
-      <!-- Instagram -->
-      <a href="https://www.instagram.com/amit02_j/" target="_blank" aria-label="Instagram" class="hover:text-pink-400 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
-        </svg>
-      </a>
-
-      <!-- GitHub -->
-      <a href="http://github.com/rameshjatav" target="_blank" aria-label="GitHub" class="hover:text-gray-300 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.66-.22.66-.48v-1.7c-2.78.61-3.37-1.4-3.37-1.4-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.8-4.57 5.05.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.02 10.02 0 0022 12.26C22 6.58 17.52 2 12 2z"/>
-        </svg>
-      </a>
-
-      <!-- LinkedIn -->
-      <a href="https://in.linkedin.com/in/ramesh-jatav-150328266" target="_blank" aria-label="LinkedIn" class="hover:text-blue-400 transition">
-        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-          <path d="M19 0h-14C2.69 0 1 .69 1 2v20c0 1.31.69 2 2 2h14c1.31 0 2-.69 2-2V2c0-1.31-.69-2-2-2zM8.5 18h-3v-9h3v9zm-1.5-10.28c-.97 0-1.75-.79-1.75-1.76S6.03 4.2 7 4.2s1.75.78 1.75 1.76-.78 1.76-1.75 1.76zM19 18h-3v-4.5c0-1.08-.37-1.82-1.29-1.82-.71 0-1.13.48-1.31.94-.07.17-.09.41-.09.65V18h-3v-9h3v1.23c.39-.61 1.09-1.48 2.66-1.48 1.94 0 3.32 1.27 3.32 3.99V18z"/>
-        </svg>
-      </a>
+      </div>
     </div>
 
-    <!-- Gallery Link -->
-    <a href="gallery.html" class="text-white hover:text-cyan-400 mt-3 block">Gallery</a>
-  </div>
-</footer>
+    <!-- Company Projects -->
+    <div data-aos="fade-up">
+      <h4 class="text-2xl text-center text-white font-semibold mb-6 underline decoration-cyan-500">Company Projects</h4>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div class="bg-gray-900 rounded-lg shadow-lg p-6 border border-cyan-600 hover:scale-105 transition">
+          <h5 class="text-xl font-bold text-cyan-400 mb-2">E-commerce Dashboard</h5>
+          <p class="text-gray-300 mb-2">Admin panel to track orders, users, payments.</p>
+          <p class="text-sm text-gray-400 mb-2">Tech: Node.js, MySQL, Tailwind CSS</p>
+          <div class="flex space-x-4">
+            <a href="#" class="text-cyan-400 underline">Live</a>
+            <a href="#" class="text-cyan-400 underline">GitHub</a>
+          </div>
+        </div>
 
- <!-- AOS JS -->
+        <!-- Add more company projects here -->
+      </div>
+    </div>
+  </section>
 
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init({ duration: 1200 });
+  <!-- Contact Section -->
+  <section id="contact" class="py-20 px-8 bg-gray-900" data-aos="fade-up">
+    <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">Contact Me</h3>
+    <form id="contactForm" class="max-w-xl mx-auto bg-gray-800 p-6 rounded-lg space-y-4">
+      <input type="text" id="name" placeholder="Your Name" required
+        class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500" />
+      <input type="email" id="email" placeholder="Your Email" required
+        class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500" />
+      <textarea id="message" placeholder="Your Message" required
+        class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500"></textarea>
+      <button type="submit" class="bg-cyan-500 px-6 py-3 rounded text-white hover:bg-cyan-600 transition">Send</button>
+    </form>
 
-        document.getElementById('contactForm').addEventListener('submit', async (e) => {
-          e.preventDefault();
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay"
+      class="fixed inset-0 bg-gray-900 bg-opacity-50 backdrop-blur-sm flex items-center justify-center z-50 hidden">
+      <div class="text-teal-400 text-lg font-semibold animate-pulse">Sending...</div>
+    </div>
 
-          const name = document.getElementById('name').value.trim();
-          const email = document.getElementById('email').value.trim();
-          const message = document.getElementById('message').value.trim();
+    <!-- Success Popup -->
+    <div id="successPopup"
+      class="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-green-500 text-white px-6 py-4 rounded shadow-lg z-50 hidden text-center text-lg sm:text-base">
+      Message sent successfully! <span id="countdown">6</span>s
+    </div>
+  </section>
 
-          try {
-            const res = await fetch('http://localhost:5000/api/contact', {
-              method: 'POST',
-              headers: {
-                'Content-Type': 'application/json'
-              },
-              body: JSON.stringify({ name, email, message })
-            });
 
-            const data = await res.json();
-            if (res.ok) {
-              alert(data.message || 'Message sent!');
-            } else {
-              alert(data.error || 'Failed to send message');
-            }
-          } catch (err) {
-            alert('Error sending message');
-            console.error(err);
+  <!-- Footer -->
+  <footer class="bg-black text-center text-gray-500 p-6">
+    <div class="flex flex-col items-center space-y-3">
+      <p>© 2025 Ramesh Jatav. All rights reserved.</p>
+
+      <!-- Social Icons -->
+      <div class="flex space-x-6 text-white text-2xl">
+        <!-- Instagram -->
+        <a href="https://www.instagram.com/amit02_j/" target="_blank" aria-label="Instagram"
+          class="hover:text-pink-400 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z" />
+          </svg>
+        </a>
+
+        <!-- GitHub -->
+        <a href="http://github.com/rameshjatav" target="_blank" aria-label="GitHub"
+          class="hover:text-gray-300 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.66-.22.66-.48v-1.7c-2.78.61-3.37-1.4-3.37-1.4-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.8-4.57 5.05.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.02 10.02 0 0022 12.26C22 6.58 17.52 2 12 2z" />
+          </svg>
+        </a>
+
+        <!-- LinkedIn -->
+        <a href="https://in.linkedin.com/in/ramesh-jatav-150328266" target="_blank" aria-label="LinkedIn"
+          class="hover:text-blue-400 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path
+              d="M19 0h-14C2.69 0 1 .69 1 2v20c0 1.31.69 2 2 2h14c1.31 0 2-.69 2-2V2c0-1.31-.69-2-2-2zM8.5 18h-3v-9h3v9zm-1.5-10.28c-.97 0-1.75-.79-1.75-1.76S6.03 4.2 7 4.2s1.75.78 1.75 1.76-.78 1.76-1.75 1.76zM19 18h-3v-4.5c0-1.08-.37-1.82-1.29-1.82-.71 0-1.13.48-1.31.94-.07.17-.09.41-.09.65V18h-3v-9h3v1.23c.39-.61 1.09-1.48 2.66-1.48 1.94 0 3.32 1.27 3.32 3.99V18z" />
+          </svg>
+        </a>
+      </div>
+
+      <!-- Gallery Link -->
+      <a href="gallery.html" class="text-white hover:text-cyan-400 mt-3 block">Gallery</a>
+    </div>
+  </footer>
+
+  <!-- AOS JS -->
+
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <script>
+    AOS.init({ duration: 1200 });
+
+
+  </script>
+  <script>
+    document.addEventListener("DOMContentLoaded", () => {
+      const form = document.getElementById("contactForm");
+      const loadingOverlay = document.getElementById("loadingOverlay");
+      const successPopup = document.getElementById("successPopup");
+      const countdownEl = document.getElementById("countdown");
+
+      const showLoading = () => loadingOverlay.classList.remove("hidden");
+      const hideLoading = () => loadingOverlay.classList.add("hidden");
+
+      const showSuccessPopup = () => {
+        let seconds = 6;
+        successPopup.classList.remove("hidden");
+        countdownEl.textContent = seconds;
+
+        const interval = setInterval(() => {
+          seconds--;
+          countdownEl.textContent = seconds;
+          if (seconds <= 0) {
+            clearInterval(interval);
+            successPopup.classList.add("hidden");
           }
-        });
-</script>
+        }, 1000);
+      };
+
+      const sendMessage = async () => {
+        const name = document.getElementById("name").value.trim();
+        const email = document.getElementById("email").value.trim();
+        const message = document.getElementById("message").value.trim();
+
+        if (!name || !email || !message) return;
+
+        showLoading();
+
+        try {
+          const res = await fetch("http://localhost:5000/api/contact", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ name, email, message }),
+          });
+
+          const data = await res.json();
+          hideLoading();
+
+          if (res.ok) {
+            showSuccessPopup();
+            form.reset();
+            document.getElementById("email").value = email;
+          } else {
+            alert(data.message || data.error || "Failed to send");
+          }
+        } catch (err) {
+          hideLoading();
+          alert("An error occurred. Please try again.");
+        }
+      };
+
+      form.addEventListener("submit", (e) => {
+        e.preventDefault();
+        sendMessage();
+      });
+
+      // Enter key trigger (inside textarea)
+      document.getElementById("message").addEventListener("keydown", (e) => {
+        if (e.key === "Enter" && !e.shiftKey) {
+          e.preventDefault();
+          sendMessage();
+        }
+      });
+    });
+  </script>
 
 </body>
 
