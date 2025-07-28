@@ -196,9 +196,9 @@
     <section id="contact" class="py-20 px-8 bg-gray-900" data-aos="fade-up">
         <h3 class="text-3xl text-center text-cyan-400 font-bold mb-10">Contact Me</h3>
         <form class="max-w-xl mx-auto bg-gray-800 p-6 rounded-lg space-y-4">
-            <input type="text" placeholder="Your Name" class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500" />
-            <input type="email" placeholder="Your Email" class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500" />
-            <textarea placeholder="Your Message" class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500"></textarea>
+            <input type="text" id="name" placeholder="Your Name"required class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500" />
+            <input type="email" id="email" placeholder="Your Email"required class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500" />
+            <textarea id="message" placeholder="Your Message" required class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500"></textarea>
             <button type="submit" class="bg-cyan-500 px-6 py-3 rounded text-white hover:bg-cyan-600 transition">Send</button>
         </form>
     </section>
@@ -242,7 +242,36 @@
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
     <script>
         AOS.init({ duration: 1200 });
-    </script>
+
+        document.getElementById('contactForm').addEventListener('submit', async (e) => {
+          e.preventDefault();
+
+          const name = document.getElementById('name').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const message = document.getElementById('message').value.trim();
+
+          try {
+            const res = await fetch('http://localhost:5000/api/contact', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ name, email, message })
+            });
+
+            const data = await res.json();
+            if (res.ok) {
+              alert(data.message || 'Message sent!');
+            } else {
+              alert(data.error || 'Failed to send message');
+            }
+          } catch (err) {
+            alert('Error sending message');
+            console.error(err);
+          }
+        });
+</script>
+
 </body>
 
 </html>
