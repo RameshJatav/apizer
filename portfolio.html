@@ -227,6 +227,9 @@
       <textarea id="message" placeholder="Your Message" required
         class="w-full p-3 bg-gray-900 text-white rounded border border-cyan-500"></textarea>
       <button type="submit" class="bg-cyan-500 px-6 py-3 rounded text-white hover:bg-cyan-600 transition">Send</button>
+
+      <p id="errorMessage" class="text-red-500 text-center hidden"></p>
+
     </form>
 
     <!-- Loading Overlay -->
@@ -292,76 +295,93 @@
 
   </script>
   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-      const form = document.getElementById("contactForm");
-      const loadingOverlay = document.getElementById("loadingOverlay");
-      const successPopup = document.getElementById("successPopup");
-      const countdownEl = document.getElementById("countdown");
+document.addEventListener("DOMContentLoaded", () => {
+  const form = document.getElementById("contactForm");
+  const loadingOverlay = document.getElementById("loadingOverlay");
+  const successPopup = document.getElementById("successPopup");
+  const countdownEl = document.getElementById("countdown");
+  const errorMessageEl = document.getElementById("errorMessage");
 
-      const showLoading = () => loadingOverlay.classList.remove("hidden");
-      const hideLoading = () => loadingOverlay.classList.add("hidden");
+  const showLoading = () => loadingOverlay.classList.remove("hidden");
+  const hideLoading = () => loadingOverlay.classList.add("hidden");
 
-      const showSuccessPopup = () => {
-        let seconds = 6;
-        successPopup.classList.remove("hidden");
-        countdownEl.textContent = seconds;
+  const showError = (msg) => {
+    errorMessageEl.textContent = msg;
+    errorMessageEl.classList.remove("hidden");
+  };
 
-        const interval = setInterval(() => {
-          seconds--;
-          countdownEl.textContent = seconds;
-          if (seconds <= 0) {
-            clearInterval(interval);
-            successPopup.classList.add("hidden");
-          }
-        }, 1000);
-      };
+  const clearError = () => {
+    errorMessageEl.textContent = "";
+    errorMessageEl.classList.add("hidden");
+  };
 
-      const sendMessage = async () => {
-        const name = document.getElementById("name").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const message = document.getElementById("message").value.trim();
+  const showSuccessPopup = () => {
+    let seconds = 6;
+    successPopup.classList.remove("hidden");
+    countdownEl.textContent = seconds;
 
-        if (!name || !email || !message) return;
+    const interval = setInterval(() => {
+      seconds--;
+      countdownEl.textContent = seconds;
+      if (seconds <= 0) {
+        clearInterval(interval);
+        successPopup.classList.add("hidden");
+      }
+    }, 1000);
+  };
 
-        showLoading();
+  const sendMessage = async () => {
+    const name = document.getElementById("name").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const message = document.getElementById("message").value.trim();
 
-        try {
-          const res = await fetch("http://localhost:5000/api/contact", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, email, message }),
-          });
+    clearError();
 
-          const data = await res.json();
-          hideLoading();
+    if (!name || !email || !message) {
+      showError("Please fill out all fields.");
+      return;
+    }
 
-          if (res.ok) {
-            showSuccessPopup();
-            form.reset();
-            document.getElementById("email").value = email;
-          } else {
-            alert(data.message || data.error || "Failed to send");
-          }
-        } catch (err) {
-          hideLoading();
-          alert("An error occurred. Please try again.");
-        }
-      };
+    showLoading();
 
-      form.addEventListener("submit", (e) => {
-        e.preventDefault();
-        sendMessage();
+    try {
+      const res = await fetch("http://localhost:5000/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name, email, message }),
       });
 
-      // Enter key trigger (inside textarea)
-      document.getElementById("message").addEventListener("keydown", (e) => {
-        if (e.key === "Enter" && !e.shiftKey) {
-          e.preventDefault();
-          sendMessage();
-        }
-      });
-    });
-  </script>
+      const data = await res.json();
+      hideLoading();
+
+      if (res.ok) {
+        showSuccessPopup();
+        form.reset();
+        document.getElementById("email").value = email;
+        clearError();
+      } else {
+        showError(data.message || data.error || "Failed to send message.");
+      }
+    } catch (err) {
+      hideLoading();
+      showError("An error occurred. Please try again.");
+    }
+  };
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault();
+    sendMessage();
+  });
+
+  document.getElementById("message").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      sendMessage();
+    }
+  });
+});
+
+</script>
 
 </body>
 
