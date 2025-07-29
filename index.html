@@ -288,117 +288,256 @@
     btn.parentElement.remove();
   }
 
+  // async function sendRequest() {
+  //   const spinner = document.getElementById('loading-spinner');
+  //   const sendBtn = document.getElementById('send-btn');
+  //   spinner.classList.remove('hidden');
+  //   sendBtn.disabled = true;
+
+  //   const method = document.getElementById('method').value;
+  //   const url = document.getElementById('url').value;
+  //   const headersText = document.getElementById('headers').value;
+  //   const authType = document.getElementById('auth-type').value;
+  //   const token = document.getElementById('auth-token').value.trim();
+
+  //   let headers = {};
+  //   try {
+  //     headers = headersText ? JSON.parse(headersText) : {};
+  //   } catch (e) {
+  //     alert("Invalid JSON in headers");
+  //     return;
+  //   }
+
+  //   if (authType === 'jwt' && token) headers['Authorization'] = `Bearer ${token}`;
+  //   else if (authType === 'api-key' && token) headers['Authorization'] = `ApiKey ${token}`;
+
+  //   const fields = document.getElementById('fields-container').children;
+  //   let useFormData = false;
+  //   const formData = new FormData();
+  //   const jsonBody = {};
+
+  //   for (let field of fields) {
+  //     if (!field.querySelector('.field-check')?.checked) continue;
+  //     const key = field.querySelector('input[name="key"]')?.value;
+  //     const valueElem = field.querySelector('input[name="value"]');
+  //     if (!key || !valueElem) continue;
+
+  //     if (valueElem.type === 'file') {
+  //       useFormData = true;
+  //       if (valueElem.files.length > 0) {
+  //         formData.append(key, valueElem.files[0]);
+  //       }
+  //     } else {
+  //       formData.append(key, valueElem.value);
+  //       jsonBody[key] = valueElem.value;
+  //     }
+  //   }
+
+  //   const options = { method, headers: { ...headers } };
+  //   if (method !== 'GET') {
+  //     if (useFormData) {
+  //       options.body = formData;
+  //       delete options.headers['Content-Type'];
+  //     } else {
+  //       options.headers['Content-Type'] = 'application/json';
+  //       options.body = JSON.stringify(jsonBody);
+  //     }
+  //   }
+
+  //   const start = performance.now();
+  //   try {
+  //     const res = await fetch(url, options);
+  //     const time = (performance.now() - start).toFixed(2);
+  //     const contentType = res.headers.get('content-type');
+  //     const statusEl = document.getElementById('response-status');
+  //     const responseContainer = document.getElementById('response-body');
+
+  //     // Clear previous styles and content
+  //     statusEl.classList.remove('text-green-400', 'text-yellow-400', 'text-red-400');
+  //     responseContainer.innerHTML = '';
+
+  //     // Status color
+  //     if (res.status === 200) {
+  //       statusEl.classList.add('text-green-400');
+  //     } else if (res.status === 500) {
+  //       statusEl.classList.add('text-yellow-400');
+  //     } else if ([400, 403, 404].includes(res.status)) {
+  //       statusEl.classList.add('text-red-400');
+  //     }
+
+  //     statusEl.textContent = `Status: ${res.status} (${res.statusText}) | Time: ${time} ms`;
+  //     document.getElementById('time-display').textContent = `⏱ ${(time / 1000).toFixed(2)} s | ${new Date().toLocaleTimeString()}`;
+
+  //     // Display content
+  //     if (contentType?.startsWith('image/')) {
+  //       const blob = await res.blob();
+  //       const imgURL = URL.createObjectURL(blob);
+  //       const img = document.createElement('img');
+  //       img.src = imgURL;
+  //       img.alt = "Fetched Image";
+  //       img.className = "max-w-full h-auto rounded border";
+  //       responseContainer.appendChild(img);
+  //     } else if (contentType?.includes('application/json')) {
+  //       const json = await res.json();
+  //       responseContainer.textContent = JSON.stringify(json, null, 2);
+  //     } else {
+  //       const text = await res.text();
+  //       responseContainer.textContent = text;
+  //     }
+
+  //     saveHistory({ method, url, time: new Date().toLocaleTimeString(), timestamp: Date.now() });
+
+  //   } catch (err) {
+  //     const statusEl = document.getElementById('response-status');
+  //     statusEl.textContent = 'Error';
+  //     statusEl.classList.remove('text-green-400', 'text-yellow-400');
+  //     statusEl.classList.add('text-red-400');
+
+  //     document.getElementById('response-body').textContent = err.toString();
+  //   } finally {
+  //     spinner.classList.add('hidden');
+  //     sendBtn.disabled = false;
+  //   }
+  // }
+
+
   async function sendRequest() {
-    const spinner = document.getElementById('loading-spinner');
-    const sendBtn = document.getElementById('send-btn');
-    spinner.classList.remove('hidden');
-    sendBtn.disabled = true;
+  const spinner = document.getElementById('loading-spinner');
+  const sendBtn = document.getElementById('send-btn');
+  spinner.classList.remove('hidden');
+  sendBtn.disabled = true;
 
-    const method = document.getElementById('method').value;
-    const url = document.getElementById('url').value;
-    const headersText = document.getElementById('headers').value;
-    const authType = document.getElementById('auth-type').value;
-    const token = document.getElementById('auth-token').value.trim();
+  const method = document.getElementById('method').value;
+  const url = document.getElementById('url').value.trim();
+  const headersText = document.getElementById('headers').value;
+  const authType = document.getElementById('auth-type').value;
+  const token = document.getElementById('auth-token').value.trim();
 
-    let headers = {};
-    try {
-      headers = headersText ? JSON.parse(headersText) : {};
-    } catch (e) {
-      alert("Invalid JSON in headers");
-      return;
-    }
+  // ✅ Validate empty or same-page URL
+  if (!url || url === "" || url === window.location.href || url === window.location.origin || url === window.location.origin + '/') {
+    alert("⚠️ Please enter a valid external API URL. Blank or self-referencing requests are not allowed.");
+    spinner.classList.add('hidden');
+    sendBtn.disabled = false;
+    return;
+  }
 
-    if (authType === 'jwt' && token) headers['Authorization'] = `Bearer ${token}`;
-    else if (authType === 'api-key' && token) headers['Authorization'] = `ApiKey ${token}`;
+  // ✅ Validate URL format
+  try {
+    new URL(url);
+  } catch (e) {
+    alert("❌ Invalid URL format.");
+    spinner.classList.add('hidden');
+    sendBtn.disabled = false;
+    return;
+  }
 
-    const fields = document.getElementById('fields-container').children;
-    let useFormData = false;
-    const formData = new FormData();
-    const jsonBody = {};
+  // ✅ Parse headers safely
+  let headers = {};
+  try {
+    headers = headersText ? JSON.parse(headersText) : {};
+  } catch (e) {
+    alert("❌ Invalid JSON format in headers.");
+    spinner.classList.add('hidden');
+    sendBtn.disabled = false;
+    return;
+  }
 
-    for (let field of fields) {
-      if (!field.querySelector('.field-check')?.checked) continue;
-      const key = field.querySelector('input[name="key"]')?.value;
-      const valueElem = field.querySelector('input[name="value"]');
-      if (!key || !valueElem) continue;
+  // ✅ Authorization
+  if (authType === 'jwt' && token) headers['Authorization'] = `Bearer ${token}`;
+  else if (authType === 'api-key' && token) headers['Authorization'] = `ApiKey ${token}`;
 
-      if (valueElem.type === 'file') {
-        useFormData = true;
-        if (valueElem.files.length > 0) {
-          formData.append(key, valueElem.files[0]);
-        }
-      } else {
-        formData.append(key, valueElem.value);
-        jsonBody[key] = valueElem.value;
+  // ✅ Collect custom fields
+  const fields = document.getElementById('fields-container').children;
+  let useFormData = false;
+  const formData = new FormData();
+  const jsonBody = {};
+
+  for (let field of fields) {
+    if (!field.querySelector('.field-check')?.checked) continue;
+    const key = field.querySelector('input[name="key"]')?.value;
+    const valueElem = field.querySelector('input[name="value"]');
+    if (!key || !valueElem) continue;
+
+    if (valueElem.type === 'file') {
+      useFormData = true;
+      if (valueElem.files.length > 0) {
+        formData.append(key, valueElem.files[0]);
       }
-    }
-
-    const options = { method, headers: { ...headers } };
-    if (method !== 'GET') {
-      if (useFormData) {
-        options.body = formData;
-        delete options.headers['Content-Type'];
-      } else {
-        options.headers['Content-Type'] = 'application/json';
-        options.body = JSON.stringify(jsonBody);
-      }
-    }
-
-    const start = performance.now();
-    try {
-      const res = await fetch(url, options);
-      const time = (performance.now() - start).toFixed(2);
-      const contentType = res.headers.get('content-type');
-      const statusEl = document.getElementById('response-status');
-      const responseContainer = document.getElementById('response-body');
-
-      // Clear previous styles and content
-      statusEl.classList.remove('text-green-400', 'text-yellow-400', 'text-red-400');
-      responseContainer.innerHTML = '';
-
-      // Status color
-      if (res.status === 200) {
-        statusEl.classList.add('text-green-400');
-      } else if (res.status === 500) {
-        statusEl.classList.add('text-yellow-400');
-      } else if ([400, 403, 404].includes(res.status)) {
-        statusEl.classList.add('text-red-400');
-      }
-
-      statusEl.textContent = `Status: ${res.status} (${res.statusText}) | Time: ${time} ms`;
-      document.getElementById('time-display').textContent = `⏱ ${(time / 1000).toFixed(2)} s | ${new Date().toLocaleTimeString()}`;
-
-      // Display content
-      if (contentType?.startsWith('image/')) {
-        const blob = await res.blob();
-        const imgURL = URL.createObjectURL(blob);
-        const img = document.createElement('img');
-        img.src = imgURL;
-        img.alt = "Fetched Image";
-        img.className = "max-w-full h-auto rounded border";
-        responseContainer.appendChild(img);
-      } else if (contentType?.includes('application/json')) {
-        const json = await res.json();
-        responseContainer.textContent = JSON.stringify(json, null, 2);
-      } else {
-        const text = await res.text();
-        responseContainer.textContent = text;
-      }
-
-      saveHistory({ method, url, time: new Date().toLocaleTimeString(), timestamp: Date.now() });
-
-    } catch (err) {
-      const statusEl = document.getElementById('response-status');
-      statusEl.textContent = 'Error';
-      statusEl.classList.remove('text-green-400', 'text-yellow-400');
-      statusEl.classList.add('text-red-400');
-
-      document.getElementById('response-body').textContent = err.toString();
-    } finally {
-      spinner.classList.add('hidden');
-      sendBtn.disabled = false;
+    } else {
+      formData.append(key, valueElem.value);
+      jsonBody[key] = valueElem.value;
     }
   }
+
+  // ✅ Setup fetch options
+  const options = { method, headers: { ...headers } };
+  if (method !== 'GET') {
+    if (useFormData) {
+      options.body = formData;
+      delete options.headers['Content-Type'];
+    } else {
+      options.headers['Content-Type'] = 'application/json';
+      options.body = JSON.stringify(jsonBody);
+    }
+  }
+
+  // ✅ Request timing
+  const start = performance.now();
+  try {
+    const res = await fetch(url, options);
+    const time = (performance.now() - start).toFixed(2);
+    const contentType = res.headers.get('content-type');
+    const statusEl = document.getElementById('response-status');
+    const responseContainer = document.getElementById('response-body');
+
+    // Reset previous styles
+    statusEl.classList.remove('text-green-400', 'text-yellow-400', 'text-red-400');
+    responseContainer.innerHTML = '';
+
+    // Status coloring
+    if (res.status === 200) {
+      statusEl.classList.add('text-green-400');
+    } else if (res.status === 500) {
+      statusEl.classList.add('text-yellow-400');
+    } else if ([400, 403, 404].includes(res.status)) {
+      statusEl.classList.add('text-red-400');
+    }
+
+    statusEl.textContent = `Status: ${res.status} (${res.statusText}) | Time: ${time} ms`;
+    document.getElementById('time-display').textContent = `⏱ ${(time / 1000).toFixed(2)} s | ${new Date().toLocaleTimeString()}`;
+
+    // ✅ Display response
+    if (contentType?.startsWith('image/')) {
+      const blob = await res.blob();
+      const imgURL = URL.createObjectURL(blob);
+      const img = document.createElement('img');
+      img.src = imgURL;
+      img.alt = "Fetched Image";
+      img.className = "max-w-full h-auto rounded border";
+      responseContainer.appendChild(img);
+    } else if (contentType?.includes('application/json')) {
+      const json = await res.json();
+      responseContainer.textContent = JSON.stringify(json, null, 2);
+    } else {
+      const text = await res.text();
+      responseContainer.textContent = text;
+    }
+
+    // ✅ Save to history
+    saveHistory({ method, url, time: new Date().toLocaleTimeString(), timestamp: Date.now() });
+
+  } catch (err) {
+    const statusEl = document.getElementById('response-status');
+    statusEl.textContent = '❌ Request Failed';
+    statusEl.classList.remove('text-green-400', 'text-yellow-400');
+    statusEl.classList.add('text-red-400');
+
+    document.getElementById('response-body').textContent = err.toString();
+  } finally {
+    spinner.classList.add('hidden');
+    sendBtn.disabled = false;
+  }
+}
 
   document.addEventListener('keydown', function (event) {
     if (event.ctrlKey && event.key === 'Enter') {
@@ -462,248 +601,6 @@
   };
 </script>
 
-  <!-- <script>
-    // Show/Hide history
-    function showHistory() {
-      const list = document.getElementById('history-list');
-      list.innerHTML = '';
-
-      let history = JSON.parse(localStorage.getItem('requestHistory') || '[]');
-      const now = Date.now();
-      const threedays = 3 * 24 * 60 * 60 * 1000;
-
-      history = history.filter(entry => {
-        if (now - entry.timestamp > threedays) {
-          alert('Some entries older than 3 days were deleted.');
-          return false;
-        }
-        return true;
-      });
-
-      localStorage.setItem('requestHistory', JSON.stringify(history));
-
-      history.reverse().forEach(entry => {
-        const li = document.createElement('li');
-        li.innerHTML = `
-          <span class="text-green-400">${entry.time}</span> 
-          <span class="text-yellow-400">${entry.method}</span> 
-          <span class="text-red-400">${entry.url}</span>
-          `;
-        list.appendChild(li);
-      });
-
-      document.getElementById('history-popup').style.display = 'flex';
-    }
-
-    function closeHistory() {
-      document.getElementById('history-popup').style.display = 'none';
-    }
-
-    function addField(k = '', v = '', t = 'text', checked = true) {
-      const container = document.getElementById('fields-container');
-      const div = document.createElement('div');
-      div.className = 'flex flex-wrap items-center gap-2';
-
-      div.innerHTML = `
-        <label class="flex items-center gap-1 text-sm">
-          <input type="checkbox" class="field-check" ${checked ? 'checked' : ''}/> 
-        </label>
-        <input type="text" name="key" class="bg-black border p-2 rounded text-white w-1/4" value="${k}" placeholder="KEY"/>
-        <select onchange="handleTypeChange(this)" class="bg-black text-white border p-2 rounded">
-          <option value="text" ${t === 'text' ? 'selected' : ''}>Text</option>
-          <option value="file" ${t === 'file' ? 'selected' : ''}>File</option>
-        </select>
-        <input type="${t}" name="value" class="bg-black border p-2 rounded text-white w-1/4" value="${t === 'text' ? v : ''}" placeholder="VALUES"/>
-        <button onclick="removeField(this)" class="text-red-500 hover:text-red-700">✖</button>
-      `;
-
-      container.appendChild(div);
-    }
-
-    function handleTypeChange(sel) {
-      const input = sel.nextElementSibling;
-      const parent = sel.parentNode;
-
-      const newInput = document.createElement('input');
-      newInput.className = 'bg-black border p-2 rounded text-white w-1/4';
-      newInput.name = 'value';
-      newInput.type = sel.value;
-
-      parent.replaceChild(newInput, input);
-    }
-
-    function removeField(btn) {
-      btn.parentElement.remove();
-    }
-
-    async function sendRequest() {
-      const spinner = document.getElementById('loading-spinner');
-      const sendBtn = document.getElementById('send-btn');
-      spinner.classList.remove('hidden');
-      sendBtn.disabled = true;
-
-      const method = document.getElementById('method').value;
-      const url = document.getElementById('url').value;
-      const headersText = document.getElementById('headers').value;
-      const authType = document.getElementById('auth-type').value;
-      const token = document.getElementById('auth-token').value.trim();
-
-      let headers = {};
-      try {
-        headers = headersText ? JSON.parse(headersText) : {};
-      } catch (e) {
-        alert("Invalid JSON in headers");
-        return;
-      }
-
-      if (authType === 'jwt' && token) headers['Authorization'] = `Bearer ${token}`;
-      else if (authType === 'api-key' && token) headers['Authorization'] = `ApiKey ${token}`;
-
-      const fields = document.getElementById('fields-container').children;
-      let useFormData = false;
-      const formData = new FormData();
-      const jsonBody = {};
-
-      for (let field of fields) {
-        if (!field.querySelector('.field-check')?.checked) continue;
-        const key = field.querySelector('input[name="key"]')?.value;
-        const valueElem = field.querySelector('input[name="value"]');
-        if (!key || !valueElem) continue;
-
-        if (valueElem.type === 'file') {
-          useFormData = true;
-          if (valueElem.files.length > 0) {
-            formData.append(key, valueElem.files[0]);
-          }
-        } else {
-          formData.append(key, valueElem.value);
-          jsonBody[key] = valueElem.value;
-        }
-      }
-
-      const options = { method, headers: { ...headers } };
-      if (method !== 'GET') {
-        if (useFormData) {
-          options.body = formData;
-          delete options.headers['Content-Type'];
-        } else {
-          options.headers['Content-Type'] = 'application/json';
-          options.body = JSON.stringify(jsonBody);
-        }
-      }
-
-      const start = performance.now();
-      try {
-        const res = await fetch(url, options);
-        const time = (performance.now() - start).toFixed(2);
-        const contentType = res.headers.get('content-type');
-        let responseBody;
-
-        if (contentType?.includes('application/json')) {
-          responseBody = JSON.stringify(await res.json(), null, 2);
-        } else {
-          responseBody = await res.text();
-        }
-
-        const statusEl = document.getElementById('response-status');
-
-        // Remove previous text color classes
-        statusEl.classList.remove('text-green-400', 'text-yellow-400', 'text-red-400');
-
-        // Set class based on status
-        if (res.status === 200) {
-          statusEl.classList.add('text-green-400');
-        } else if (res.status === 500) {
-          statusEl.classList.add('text-yellow-400');
-        } else if ([400, 403, 404].includes(res.status)) {
-          statusEl.classList.add('text-red-400');
-        }
-
-        statusEl.textContent = `Status: ${res.status} (${res.statusText}) | Time: ${time} ms`;
-        document.getElementById('time-display').textContent = `⏱ ${(time / 1000).toFixed(2)} s | ${new Date().toLocaleTimeString()}`;
-        document.getElementById('response-body').textContent = responseBody;
-
-        saveHistory({ method, url, time: new Date().toLocaleTimeString(), timestamp: Date.now() });
-
-      } catch (err) {
-        const statusEl = document.getElementById('response-status');
-        statusEl.textContent = 'Error';
-        statusEl.classList.remove('text-green-400', 'text-yellow-400');
-        statusEl.classList.add('text-red-400');
-
-        document.getElementById('response-body').textContent = err.toString();
-      } finally {
-        spinner.classList.add('hidden');
-        sendBtn.disabled = false;
-      }
-
-    }
-
-
-    document.addEventListener('keydown', function (event) {
-      if (event.ctrlKey && event.key === 'Enter') {
-        const sendBtn = document.getElementById('send-btn');
-        if (!sendBtn.disabled) {
-          sendBtn.click();
-        }
-      }
-    });
-    function saveHistory(entry) {
-      const history = JSON.parse(localStorage.getItem('requestHistory') || '[]');
-      history.push(entry);
-      localStorage.setItem('requestHistory', JSON.stringify(history));
-    }
-
-    function saveFormState() {
-      const state = {
-        authType: document.getElementById('auth-type').value,
-        authToken: document.getElementById('auth-token').value,
-        method: document.getElementById('method').value,
-        url: document.getElementById('url').value,
-        headers: document.getElementById('headers').value
-      };
-      localStorage.setItem('formState', JSON.stringify(state));
-    }
-
-    function loadFormState() {
-      const state = JSON.parse(localStorage.getItem('formState') || '{}');
-      if (state.authType) document.getElementById('auth-type').value = state.authType;
-      if (state.authToken) document.getElementById('auth-token').value = state.authToken;
-      if (state.method) document.getElementById('method').value = state.method;
-      if (state.url) document.getElementById('url').value = state.url;
-      if (state.headers) document.getElementById('headers').value = state.headers;
-      if (state.authType !== 'none') document.getElementById('auth-token-container').classList.remove('hidden');
-    }
-
-    document.getElementById('auth-type').addEventListener('change', function () {
-      document.getElementById('auth-token-container').classList.toggle('hidden', this.value === 'none');
-    });
-
-    window.onload = () => {
-      loadFormState();
-      const savedFields = JSON.parse(localStorage.getItem('customFields') || '[]');
-      if (savedFields.length === 0) addField();
-      else savedFields.forEach(f => addField(f.k, f.v, f.t, f.c));
-    };
-
-    window.onbeforeunload = () => {
-      saveFormState();
-      const fields = [];
-      document.querySelectorAll('#fields-container > div').forEach(div => {
-        fields.push({
-          k: div.querySelector('input[name="key"]').value,
-          v: div.querySelector('input[name="value"]')?.value || '',
-          t: div.querySelector('select').value,
-          c: div.querySelector('.field-check').checked
-        });
-      });
-      localStorage.setItem('customFields', JSON.stringify(fields));
-    };
-
-
-
-
-  </script> -->
 
   <script type="application/ld+json">
  {
