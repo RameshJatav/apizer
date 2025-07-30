@@ -107,8 +107,8 @@
 <body class="bg-black min-h-screen text-white">
 
   <!-- Navbar -->
-  <!-- <h1 class="text-xl font-bold text-teal-500">REST API Tool</h1> -->
-  <!-- <nav class="fixed  top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md backdrop-saturate-150 p-4 shadow-md flex justify-between items-center rounded-b-lg ">
+  <nav class="fixed  top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md backdrop-saturate-150 p-4 shadow-md flex justify-between items-center rounded-b-lg ">
+    <!-- <h1 class="text-xl font-bold text-teal-500">REST API Tool</h1> -->
     <a href="https://portfolio-web-six-mu.vercel.app"><img src="./mylogo.png" alt="Ramesh Jatav"
         class="h-10 w-10  bg-transparent object-contain" /></a>
         <p class="absolute left-1/2 transform -translate-x-1/2 text-gray-600 text-xl sm:text-2xl font-light italic animate-fade-in tracking-wide font-[cursive]">
@@ -119,38 +119,7 @@
       <li><a href="./about.html" class="hover:text-teal-400 transition">About Us</a></li>
       <li><button onclick="showHistory()" class="hover:text-teal-400 transition">History</button></li>
     </ul>
-  </nav> -->
-  <nav class="fixed top-0 left-0 w-full z-50 bg-gray-600/50 backdrop-blur-md backdrop-saturate-150 p-4 shadow-md flex justify-between items-center rounded-b-lg">
-  <a href="https://portfolio-web-six-mu.vercel.app">
-    <img src="./mylogo.png" alt="Ramesh Jatav" class="h-10 w-10 bg-transparent object-contain" />
-  </a>
-
-  <div class="text-center justify-center">
-    <p class="text-gray-600 text-xl sm:text-2xl font-light italic animate-fade-in tracking-wide font-[cursive] ">hello</p>
-    <p id="title-display" class="text-green-400 font-medium text-lg "></p>
-  </div>
-
-  <div class="relative">
-    <!-- Three dots button -->
-
-    <!-- Dropdown -->
-    <div id="settingsMenu" class="hidden absolute right-0 mt-2 w-64 bg-white rounded-md shadow-lg p-4 z-50">
-      <label class="block mb-2 text-gray-700 font-medium">Enter Page Title:</label>
-      <input id="pageTitleInput" type="text" placeholder="e.g. Today's Work" class="w-full border border-gray-300 rounded px-3 py-1 focus:outline-none focus:ring focus:ring-teal-300 bg-black" />
-      <button onclick="saveTitle()"
-        class="mt-3 w-full bg-teal-500 text-white py-1 rounded hover:bg-teal-600 transition">Save</button>
-    </div>
-  </div>
-
-  <ul class="flex gap-6 text-white ml-4">
-    <li><a href="#" class="hover:text-teal-400 transition">API Testing</a></li>
-    <li><a href="./about.html" class="hover:text-teal-400 transition">About Us</a></li>
-    <li><button onclick="showHistory()" class="hover:text-teal-400 transition">History</button></li>
-    <button onclick="toggleMenu()" class="text-white text-2xl">⋮</button>
-
-  </ul>
-</nav>
-
+  </nav>
 
   <!-- History Popup -->
   <div id="history-popup" class="fixed inset-0 bg-black/40 flex justify-center items-center z-40">
@@ -631,33 +600,6 @@
     localStorage.setItem('customFields', JSON.stringify(fields));
   };
 </script>
-
-<script>
-  function toggleMenu() {
-    const menu = document.getElementById('settingsMenu');
-    menu.classList.toggle('hidden');
-  }
-
-  function saveTitle() {
-    const title = document.getElementById('pageTitleInput').value;
-    if (title.trim()) {
-      sessionStorage.setItem('pageTitle', title);
-      displayTitle();
-      toggleMenu(); // Hide menu after saving
-    }
-  }
-
-  function displayTitle() {
-    const title = sessionStorage.getItem('pageTitle');
-    if (title) {
-      document.getElementById('title-display').textContent = title;
-    }
-  }
-
-  // On page load
-  document.addEventListener('DOMContentLoaded', displayTitle);
-</script>
-
 
 
   <script type="application/ld+json">
