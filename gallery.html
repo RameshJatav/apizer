@@ -184,24 +184,31 @@
   const photoModal = document.getElementById('photoModal');
 
   // Load all valid image paths
-  async function detectAvailablePhotos() {
-    for (let i = 1; i < 100; i++) {
-      try {
-        const res = await fetch(`gallery/ph${i}.jpg`, { method: 'HEAD' });
-        if (res.ok) {
-          totalPhotos++;
-        } else {
-          break;
-        }
-      } catch {
+ async function detectAvailablePhotos() {
+  const spinner = document.getElementById('loadingSpinner');
+  spinner.classList.remove('hidden'); // Show spinner
+
+  for (let i = 1; i < 100; i++) {
+    try {
+      const res = await fetch(`gallery/ph${i}.jpg`, { method: 'HEAD' });
+      if (res.ok) {
+        totalPhotos++;
+      } else {
         break;
       }
+    } catch {
+      break;
     }
-
-    loadInitialPhotos();
-    setupScrollAnimations();
-    setTimeout(() => loadMorePhotos(), 5000);
   }
+
+  loadInitialPhotos();
+  setupScrollAnimations();
+
+  setTimeout(() => {
+    loadMorePhotos();
+    spinner.classList.add('hidden'); // Hide spinner after all photos are loaded
+  }, 500); // You can adjust this delay as needed
+}
 
   function createPhoto(i) {
     const div = document.createElement('div');
