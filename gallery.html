@@ -3,17 +3,18 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Gallery with Images & Videos</title>
+  <title>Ramesh Jatav – Photo & Video Gallery</title>
+  <link rel="icon" href="./mylogo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
+
   <style>
-    body { background: #0f0f1b; color: #f0f0f0; font-family: sans-serif; }
-    .fade-slide-up { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
-    .fade-slide-up.visible { opacity: 1; transform: translateY(0); }
-    .thumb-video { overflow: hidden; }
-    .thumb-video video { width: 100%; height: 100%; object-fit: cover; display: block; }
-    #thumbnailList img { cursor: pointer; }
-    #thumbnailList img.ring-2 { border: 2px solid cyan; }
-    /* spinner */
+    body {
+      font-family: 'Orbitron', sans-serif;
+      background-color: #0f0f1b;
+      color: #f0f0f0;
+    }
+
     .spinner {
       border: 3px solid transparent;
       border-top-color: #4fd1c5;
@@ -25,86 +26,188 @@
     @keyframes spin {
       to { transform: rotate(360deg); }
     }
+
+    .glow {
+      animation: glow 1.5s infinite alternate;
+    }
+    @keyframes glow {
+      0% { box-shadow: 0 0 5px #0ff; }
+      100% { box-shadow: 0 0 20px #0ff; }
+    }
+
+    .fade-slide-up {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+    }
+    .fade-slide-up.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    #thumbnailList::-webkit-scrollbar {
+      width: 6px;
+    }
+    #thumbnailList::-webkit-scrollbar-thumb {
+      background-color: #11413e;
+      border-radius: 4px;
+    }
+
+    .thumb-video {
+      position: relative;
+      overflow: hidden;
+    }
+    .thumb-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
   </style>
 </head>
-<body>
+<body class="scroll-smooth">
 
-  <!-- Loading Spinner -->
+  <!-- Loading spinner overlay -->
   <div id="loadingSpinner" class="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 hidden">
     <div class="spinner"></div>
   </div>
 
-  <h1 class="text-center text-3xl my-6 text-cyan-400">Gallery</h1>
-  <div id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 px-4"></div>
+  <!-- Header -->
+  <header class="fixed top-0 left-0 w-full z-40 bg-gray-600/50 backdrop-blur-md p-4 flex justify-between items-center rounded-b-lg">
+    <h1 class="text-xl text-cyan-400 font-bold glow">Ramesh Jatav</h1>
+    <nav class="space-x-4 text-white">
+      <div class="hidden md:flex space-x-4">
+        <a href="portfolio.html#about" class="hover:text-cyan-400">About</a>
+        <a href="portfolio.html#projects" class="hover:text-cyan-400">Projects</a>
+        <a href="#" class="hover:text-cyan-400">Gallery</a>
+        <a href="portfolio.html#contact" class="hover:text-cyan-400">Contact</a>
+      </div>
+      <div class="md:hidden">
+        <a href="index.html" class="hover:text-cyan-400">Home</a>
+      </div>
+    </nav>
+  </header>
 
-  <!-- Modal -->
+  <!-- Main content -->
+  <main class="pt-24 px-4 lg:px-8 pb-16">
+    <section class="text-center mb-12">
+      <h2 class="text-4xl text-cyan-400 font-bold glow mb-4">Photo & Video Gallery</h2>
+      <p class="text-gray-300 max-w-2xl mx-auto">
+        Moments from my experiences — images & videos together.
+      </p>
+    </section>
+
+    <section id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+      <!-- Thumbnails will be inserted here -->
+    </section>
+  </main>
+
+  <!-- Modal / overlay for media -->
   <div id="mediaModal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden">
-    <div class="relative bg-gray-900 rounded-lg overflow-hidden max-w-3xl w-full">
-      <button onclick="closeModal()" class="absolute top-2 right-2 text-white text-3xl">✕</button>
-      <div class="p-4 flex flex-col items-center">
-        <img id="modalImage" class="hidden max-h-[70vh] rounded" />
-        <video id="modalVideo" class="hidden max-h-[70vh]" controls></video>
-        <div class="mt-4 flex w-full justify-between">
-          <button onclick="prevMedia()" class="text-white px-4 py-2">⟨ Prev</button>
-          <button onclick="nextMedia()" class="text-white px-4 py-2">Next ⟩</button>
+    <div class="relative flex w-full max-w-6xl bg-gray-900 rounded-lg overflow-hidden">
+      <button onclick="closeModal()" class="absolute top-2 right-40 text-white text-3xl bg-red-600 hover:bg-red-700 p-2 rounded-lg z-50">✕</button>
+      <div class="flex-1 flex flex-col items-center justify-center p-4">
+        <img id="modalImage" class="hidden max-h-[80vh] rounded mb-4" alt="" />
+        <video id="modalVideo" class="hidden max-h-[80vh]" controls></video>
+        <div class="flex justify-between w-full">
+          <button onclick="prevMedia()" class="text-white text-xl px-4 py-2 hover:text-cyan-400">⟨</button>
+          <button.onclick="nextMedia()" class="text-white text-xl px-4 py-2 hover:text-cyan-400">⟩</button>
         </div>
       </div>
-      <div id="thumbnailList" class="absolute bottom-2 left-2 right-2 flex space-x-2 overflow-x-auto bg-gray-800 p-2"></div>
+      <div id="thumbnailList" class="w-32 max-h-[90vh] overflow-y-auto bg-gray-800 p-2 space-y-2"></div>
     </div>
   </div>
+
+  <!-- Footer -->
+  <footer class="bg-black text-center text-gray-500 p-6 mt-12">
+    <div class="flex flex-col items-center space-y-3">
+      <p>© 2025 Ramesh Jatav. All rights reserved.</p>
+      <div class="flex space-x-6 text-white text-2xl">
+        <a href="https://www.instagram.com/amit02_j/" target="_blank" class="hover:text-pink-400">
+          <!-- Instagram icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
+          </svg>
+        </a>
+        <a href="http://github.com/rameshjatav" target="_blank" class="hover:text-gray-300">
+          <!-- GitHub icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.66-.22.66-.48v-1.7c-2.78.61-3.37-1.4-3.37-1.4-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.8-4.57 5.05.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.02 10.02 0 0022 12.26C22 6.58 17.52 2 12 2z"/>
+          </svg>
+        </a>
+        <a href="https://in.linkedin.com/in/ramesh-jatav-150328266" target="_blank" class="hover:text-blue-400">
+          <!-- LinkedIn icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M19 0h-14C2.69 0 1 .69 1 2v20c0 1.31.69 2 2 2h14c1.31 0 2-.69 2-2V2c0-1.31-.69-2-2-2zM8.5 18h-3v-9h3v9zm-1.5-10.28c-.97 0-1.75-.79-1.75-1.76S6.03 4.2 7 4.2s1.75.78 1.75 1.76-.78 1.76-1.75 1.76zM19 18h-3v-4.5c0-1.08-.37-1.82-1.29-1.82-.71 0-1.13.48-1.31.94-.07.17-.09.41-.09.65V18h-3v-9h3v1.23c.39-.61 1.09-1.48 2.66-1.48 1.94 0 3.32 1.27 3.32 3.99V18z"/>
+          </svg>
+        </a>
+      </div>
+      <a href="gallery.html" class="text-white hover:text-cyan-400 mt-3 block">Gallery</a>
+    </div>
+  </footer>
 
   <script>
     let mediaList = [];
     let currentIndex = 0;
 
     const galleryEl = document.getElementById('gallery');
-    const loadingSpinner = document.getElementById('loadingSpinner');
+    const spinner = document.getElementById('loadingSpinner');
     const modal = document.getElementById('mediaModal');
     const modalImage = document.getElementById('modalImage');
     const modalVideo = document.getElementById('modalVideo');
-    const thumbnailList = document.getElementById('thumbnailList');
+    const thumbList = document.getElementById('thumbnailList');
 
     async function loadMediaList() {
-      loadingSpinner.classList.remove('hidden');
+      spinner.classList.remove('hidden');
       try {
-        const res = await fetch('media_list.json');
-        mediaList = await res.json();
-      } catch (e) {
-        console.error('Failed to load manifest', e);
+        const resp = await fetch('media_list.json');
+        mediaList = await resp.json();
+      } catch (err) {
+        console.error("Could not load media_list.json:", err);
       }
       renderGallery();
-      loadingSpinner.classList.add('hidden');
+      spinner.classList.add('hidden');
     }
 
     function renderGallery() {
       mediaList.forEach((item, idx) => {
-        const div = document.createElement('div');
-        div.className = 'fade-slide-up bg-gray-800 rounded-lg overflow-hidden cursor-pointer';
-        div.onclick = () => openModal(idx);
+        const card = document.createElement('div');
+        card.className = 'fade-slide-up bg-gray-800 rounded-lg overflow-hidden cursor-pointer';
+        card.onclick = () => openModal(idx);
 
         if (item.type === 'image') {
           const img = document.createElement('img');
           img.src = item.src;
           img.alt = '';
           img.className = 'w-full h-48 object-cover';
-          div.appendChild(img);
+          card.appendChild(img);
         } else if (item.type === 'video') {
           const wrapper = document.createElement('div');
           wrapper.className = 'thumb-video w-full h-48 relative';
+
           const vid = document.createElement('video');
           vid.src = item.src;
           vid.muted = true;
           vid.loop = true;
           vid.playsInline = true;
           vid.className = 'w-full h-full object-cover';
+
           wrapper.appendChild(vid);
-          wrapper.onmouseenter = () => { vid.play(); };
-          wrapper.onmouseleave = () => { vid.pause(); vid.currentTime = 0; };
-          div.appendChild(wrapper);
+
+          wrapper.onmouseenter = () => {
+            vid.play();
+          };
+          wrapper.onmouseleave = () => {
+            vid.pause();
+            vid.currentTime = 0;
+          };
+
+          card.appendChild(wrapper);
         }
 
-        galleryEl.appendChild(div);
+        galleryEl.appendChild(card);
       });
+      setupScrollAnimations();
     }
 
     function openModal(idx) {
@@ -142,22 +245,42 @@
         modalVideo.play();
       }
 
-      // thumbnails
-      thumbnailList.innerHTML = '';
+      // Thumbnails in modal
+      thumbList.innerHTML = '';
       mediaList.forEach((itm, i) => {
-        const thumb = document.createElement('img');
-        thumb.id = `thumb${i}`;
-        thumb.className = 'h-16 object-cover rounded cursor-pointer';
-        thumb.src = itm.type === 'image' ? itm.src : itm.src;
-        thumb.onclick = () => openModal(i);
+        const t = document.createElement('img');
+        t.id = `thumb${i}`;
+        t.className = 'w-full h-20 object-cover rounded cursor-pointer hover:opacity-80';
+        t.src = itm.src;
+        t.onclick = () => selectMedia(i);
         if (i === currentIndex) {
-          thumb.classList.add('ring-2', 'ring-cyan-400');
+          t.classList.add('ring-2', 'ring-cyan-400');
         }
-        thumbnailList.appendChild(thumb);
+        thumbList.appendChild(t);
       });
+    }
+
+    function selectMedia(i) {
+      currentIndex = i;
+      updateModal();
+    }
+
+    function setupScrollAnimations() {
+      const items = document.querySelectorAll('.fade-slide-up:not(.visible)');
+      const observer = new IntersectionObserver(entries => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.1 });
+
+      items.forEach(item => observer.observe(item));
     }
 
     document.addEventListener('DOMContentLoaded', loadMediaList);
   </script>
+
 </body>
 </html>
