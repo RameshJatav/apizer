@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Ramesh Jatav – Photo Gallery</title>
+  <title>Ramesh Jatav – Photo & Video Gallery</title>
   <link rel="icon" href="./mylogo.png" />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap" rel="stylesheet" />
@@ -56,6 +56,18 @@
       background-color: #11413e;
       border-radius: 4px;
     }
+
+    /* Thumbnail video hover preview styling */
+    .thumb-video {
+      position: relative;
+      overflow: hidden;
+    }
+    .thumb-video video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
   </style>
 </head>
 <body class="scroll-smooth">
@@ -84,26 +96,29 @@
   <!-- Main Content -->
   <main class="pt-24 px-4 lg:px-8 pb-16">
     <section class="text-center mb-12">
-      <h2 class="text-4xl text-cyan-400 font-bold glow mb-4">Photo Gallery</h2>
+      <h2 class="text-4xl text-cyan-400 font-bold glow mb-4">Photo & Video Gallery</h2>
       <p class="text-gray-300 max-w-2xl mx-auto">
-        Moments from my experiences, team collaborations, development projects and events with colleagues.
+        Moments from my experiences — images & videos in one place.
       </p>
     </section>
 
     <section id="gallery" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
-      <!-- Photos will be inserted here -->
+      <!-- Items will be inserted here -->
     </section>
   </main>
 
   <!-- Modal -->
-  <div id="photoModal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden">
+  <div id="mediaModal" class="fixed inset-0 bg-black bg-opacity-90 flex items-center justify-center z-50 hidden">
     <div class="relative flex w-full max-w-6xl bg-gray-900 rounded-lg overflow-hidden">
       <button onclick="closeModal()" class="absolute top-2 right-40 text-white text-3xl bg-red-600 hover:bg-red-700 p-2 rounded-lg z-50">✕</button>
       <div class="flex-1 flex flex-col items-center justify-center p-4">
-        <img id="mainImage" src="" alt="Selected" class="max-h-[80vh] rounded mb-4 transition duration-300" />
+        <!-- We'll either show image or video -->
+        <img id="modalImage" src="" alt="" class="max-h-[80vh] rounded mb-4 hidden" />
+        <video id="modalVideo" controls class="max-h-[80vh] rounded mb-4 hidden"></video>
+
         <div class="flex justify-between w-full">
-          <button onclick="prevPhoto()" class="text-white text-xl px-4 py-2 hover:text-cyan-400">⟨</button>
-          <button onclick="nextPhoto()" class="text-white text-xl px-4 py-2 hover:text-cyan-400">⟩</button>
+          <button onclick="prevMedia()" class="text-white text-xl px-4 py-2 hover:text-cyan-400">⟨</button>
+          <button onclick="nextMedia()" class="text-white text-xl px-4 py-2 hover:text-cyan-400">⟩</button>
         </div>
       </div>
       <div id="thumbnailList" class="w-32 max-h-[90vh] overflow-y-auto bg-gray-800 p-2 space-y-2"></div>
@@ -116,20 +131,17 @@
       <p>© 2025 Ramesh Jatav. All rights reserved.</p>
       <div class="flex space-x-6 text-white text-2xl">
         <a href="https://www.instagram.com/amit02_j/" target="_blank" class="hover:text-pink-400">
-          <!-- Instagram Icon -->
           <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M7.75 2h8.5A5.75 5.75 0 0122 7.75v8.5A5.75 5.75 0 0116.25 22h-8.5A5.75 5.75 0 012 16.25v-8.5A5.75 5.75 0 017.75 2zm0 1.5A4.25 4.25 0 003.5 7.75v8.5A4.25 4.25 0 007.75 20.5h8.5A4.25 4.25 0 0020.5 16.25v-8.5A4.25 4.25 0 0016.25 3.5h-8.5zM12 7a5 5 0 110 10 5 5 0 010-10zm0 1.5a3.5 3.5 0 100 7 3.5 3.5 0 000-7zm5.25-.75a.75.75 0 110 1.5.75.75 0 010-1.5z"/>
           </svg>
         </a>
         <a href="http://github.com/rameshjatav" target="_blank" class="hover:text-gray-300">
-          <!-- GitHub Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w6 h6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M12 2C6.48 2 2 6.58 2 12.26c0 4.5 2.87 8.32 6.84 9.67.5.09.66-.22.66-.48v-1.7c-2.78.61-3.37-1.4-3.37-1.4-.45-1.18-1.11-1.49-1.11-1.49-.9-.63.07-.62.07-.62 1 .07 1.53 1.06 1.53 1.06.89 1.56 2.34 1.11 2.91.85.09-.66.35-1.11.63-1.36-2.22-.26-4.56-1.14-4.56-5.06 0-1.12.39-2.03 1.03-2.75-.1-.26-.45-1.31.1-2.73 0 0 .84-.28 2.75 1.05a9.3 9.3 0 015 0c1.91-1.33 2.75-1.05 2.75-1.05.55 1.42.2 2.47.1 2.73.64.72 1.03 1.63 1.03 2.75 0 3.92-2.34 4.8-4.57 5.05.36.31.68.92.68 1.85v2.74c0 .27.16.58.67.48A10.02 10.02 0 0022 12.26C22 6.58 17.52 2 12 2z"/>
           </svg>
         </a>
         <a href="https://in.linkedin.com/in/ramesh-jatav-150328266" target="_blank" class="hover:text-blue-400">
-          <!-- LinkedIn Icon -->
-          <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w6 h6" fill="currentColor" viewBox="0 0 24 24">
             <path d="M19 0h-14C2.69 0 1 .69 1 2v20c0 1.31.69 2 2 2h14c1.31 0 2-.69 2-2V2c0-1.31-.69-2-2-2zM8.5 18h-3v-9h3v9zm-1.5-10.28c-.97 0-1.75-.79-1.75-1.76S6.03 4.2 7 4.2s1.75.78 1.75 1.76-.78 1.76-1.75 1.76zM19 18h-3v-4.5c0-1.08-.37-1.82-1.29-1.82-.71 0-1.13.48-1.31.94-.07.17-.09.41-.09.65V18h-3v-9h3v1.23c.39-.61 1.09-1.48 2.66-1.48 1.94 0 3.32 1.27 3.32 3.99V18z"/>
           </svg>
         </a>
@@ -138,106 +150,162 @@
     </div>
   </footer>
 
-  <!-- JavaScript -->
   <script>
     let currentIndex = 0;
-    let totalPhotos = 0;
-    const initialLoadCount = 10;
-    const gallery = document.getElementById('gallery');
+    let mediaList = [];  // will hold objects { type: "image"|"video", src: "path" }
+
+    const initialLoadCount = 20;
+    const galleryEl = document.getElementById('gallery');
     const thumbnailList = document.getElementById('thumbnailList');
-    const mainImage = document.getElementById('mainImage');
-    const photoModal = document.getElementById('photoModal');
+    const modal = document.getElementById('mediaModal');
+    const modalImage = document.getElementById('modalImage');
+    const modalVideo = document.getElementById('modalVideo');
     const spinner = document.getElementById('loadingSpinner');
 
-    async function detectAvailablePhotos() {
+    async function detectMediaFiles() {
       spinner.classList.remove('hidden');
-      for (let i = 1; i < 100; i++) {
-        try {
-          const res = await fetch(`gallery/ph${i}.jpg`, { method: 'HEAD' });
-          if (res.ok) totalPhotos++;
-          else break;
-        } catch {
-          break;
+
+      // Suppose your gallery folder has files named like ph1.jpg, ph2.mp4, etc.
+      // You may need a manifest or server listing in real apps. Here we try both image & video ext.
+      const exts = ['jpg', 'jpeg', 'png', 'webp', 'mp4', 'webm'];
+      for (let i = 1; i < 200; i++) {
+        for (let ext of exts) {
+          const path = `gallery/ph${i}.${ext}`;
+          try {
+            const res = await fetch(path, { method: 'HEAD' });
+            if (res.ok) {
+              // Determine type from extension
+              const type = (ext === 'mp4' || ext === 'webm') ? 'video' : 'image';
+              mediaList.push({ type, src: path });
+              break; // one ext matched, stop trying others for this index
+            }
+          } catch(e) {
+            // ignore
+          }
         }
       }
-      loadInitialPhotos();
+
+      loadInitialMedia();
       setupScrollAnimations();
       setTimeout(() => {
-        loadMorePhotos();
+        loadRemainingMedia();
         spinner.classList.add('hidden');
-      }, 500);
+      }, 300);
     }
 
-    function createPhoto(i) {
+    function createMediaThumb(idx) {
+      const item = mediaList[idx];
       const div = document.createElement('div');
       div.className = 'bg-gray-800 rounded-lg overflow-hidden shadow-lg cursor-pointer fade-slide-up';
-      div.onclick = () => openModal(i);
-      const img = document.createElement('img');
-      img.src = `gallery/ph${i + 1}.jpg`;
-      img.alt = `Photo ${i + 1}`;
-      img.className = 'w-full h-64 object-cover';
-      div.appendChild(img);
+      div.onclick = () => openModal(idx);
+
+      if (item.type === 'image') {
+        const img = document.createElement('img');
+        img.src = item.src;
+        img.alt = `Image ${idx}`;
+        img.className = 'w-full h-48 object-cover';
+        div.appendChild(img);
+      } else if (item.type === 'video') {
+        const wrapper = document.createElement('div');
+        wrapper.className = 'thumb-video w-full h-48 relative';
+        const vid = document.createElement('video');
+        vid.src = item.src;
+        vid.muted = true;
+        vid.loop = true;
+        vid.playsInline = true;
+        vid.className = 'w-full h-full object-cover';
+        wrapper.appendChild(vid);
+        wrapper.onmouseenter = () => vid.play();
+        wrapper.onmouseleave = () => {
+          vid.pause();
+          vid.currentTime = 0;
+        };
+        div.appendChild(wrapper);
+      }
+
       return div;
     }
 
-    function createThumb(i) {
-      const thumb = document.createElement('img');
-      thumb.src = `gallery/ph${i + 1}.jpg`;
-      thumb.id = `thumb${i}`;
-      thumb.className = 'w-full h-20 object-cover rounded cursor-pointer hover:opacity-80';
-      thumb.onclick = () => selectPhoto(i);
-      return thumb;
-    }
-
-    function loadInitialPhotos() {
-      const count = Math.min(initialLoadCount, totalPhotos);
+    function loadInitialMedia() {
+      const count = Math.min(initialLoadCount, mediaList.length);
       for (let i = 0; i < count; i++) {
-        gallery.appendChild(createPhoto(i));
+        galleryEl.appendChild(createMediaThumb(i));
         thumbnailList.appendChild(createThumb(i));
       }
     }
 
-    function loadMorePhotos() {
-      for (let i = initialLoadCount; i < totalPhotos; i++) {
-        gallery.appendChild(createPhoto(i));
+    function loadRemainingMedia() {
+      for (let i = initialLoadCount; i < mediaList.length; i++) {
+        galleryEl.appendChild(createMediaThumb(i));
         thumbnailList.appendChild(createThumb(i));
       }
       setupScrollAnimations();
     }
 
-    function openModal(i) {
-      currentIndex = i;
-      updateModalImage();
-      photoModal.classList.remove('hidden');
+    function createThumb(idx) {
+      const item = mediaList[idx];
+      const thumb = document.createElement('img');
+      thumb.id = `thumb${idx}`;
+      thumb.className = 'w-full h-20 object-cover rounded cursor-pointer hover:opacity-80';
+      if (item.type === 'image') {
+        thumb.src = item.src;
+      } else if (item.type === 'video') {
+        // For video, use poster or first frame — here we use video src assuming browser can show thumbnail
+        thumb.src = item.src;
+      }
+      thumb.onclick = () => selectMedia(idx);
+      return thumb;
+    }
+
+    function openModal(idx) {
+      currentIndex = idx;
+      updateModal();
+      modal.classList.remove('hidden');
     }
 
     function closeModal() {
-      photoModal.classList.add('hidden');
+      modal.classList.add('hidden');
+      // Pause video if open
+      modalVideo.pause();
     }
 
-    function nextPhoto() {
-      currentIndex = (currentIndex + 1) % totalPhotos;
-      updateModalImage();
+    function nextMedia() {
+      currentIndex = (currentIndex + 1) % mediaList.length;
+      updateModal();
     }
 
-    function prevPhoto() {
-      currentIndex = (currentIndex - 1 + totalPhotos) % totalPhotos;
-      updateModalImage();
+    function prevMedia() {
+      currentIndex = (currentIndex - 1 + mediaList.length) % mediaList.length;
+      updateModal();
     }
 
-    function selectPhoto(i) {
-      currentIndex = i;
-      updateModalImage();
+    function selectMedia(idx) {
+      currentIndex = idx;
+      updateModal();
     }
 
-    function updateModalImage() {
-      mainImage.src = `gallery/ph${currentIndex + 1}.jpg`;
-      for (let i = 0; i < totalPhotos; i++) {
-        const thumb = document.getElementById(`thumb${i}`);
-        if (thumb) thumb.classList.remove('ring-2', 'ring-cyan-400');
+    function updateModal() {
+      const item = mediaList[currentIndex];
+      // Hide both first
+      modalImage.classList.add('hidden');
+      modalVideo.classList.add('hidden');
+
+      if (item.type === 'image') {
+        modalImage.src = item.src;
+        modalImage.classList.remove('hidden');
+      } else if (item.type === 'video') {
+        modalVideo.src = item.src;
+        modalVideo.classList.remove('hidden');
+        modalVideo.play();
       }
-      const activeThumb = document.getElementById(`thumb${currentIndex}`);
-      if (activeThumb) activeThumb.classList.add('ring-2', 'ring-cyan-400');
+
+      // highlight thumbnail
+      for (let i = 0; i < mediaList.length; i++) {
+        const t = document.getElementById(`thumb${i}`);
+        if (t) t.classList.remove('ring-2', 'ring-cyan-400');
+      }
+      const active = document.getElementById(`thumb${currentIndex}`);
+      if (active) active.classList.add('ring-2', 'ring-cyan-400');
     }
 
     function setupScrollAnimations() {
@@ -255,7 +323,7 @@
     }
 
     document.addEventListener('DOMContentLoaded', () => {
-      detectAvailablePhotos();
+      detectMediaFiles();
     });
   </script>
 
